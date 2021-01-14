@@ -6,6 +6,7 @@ using Cinemachine;
 public class PlayerCameraController : MonoBehaviour
 {
     public GameObject cam;
+    public GameObject fpsCam;
 
     public bool firstPerson = true;
     public bool cameraLocked = true;
@@ -20,7 +21,8 @@ public class PlayerCameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        return;
+        cam = GameObject.FindGameObjectWithTag("MainCamera");
+        fpsCam = cam.GetComponent<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject;
     }
 
     // Update is called once per frame
@@ -41,8 +43,6 @@ public class PlayerCameraController : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * mouseSensitivity;
 
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
-
-        GameObject fpsCam = cam.GetComponent<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject;
 
         // If first person, rotate player's model regardless of if moving
         // Then do first person look around
