@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrawlerLeg : MonoBehaviour
+public class CrawlerLegTarget : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
