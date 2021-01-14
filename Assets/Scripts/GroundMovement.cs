@@ -45,12 +45,10 @@ public class GroundMovement : MonoBehaviour
         // Check in front of the entity for a collision
         if (_body.SweepTest(_moveDirection, out hit, _checkSlopeDistance))
         {
-            print("game object " + gameObject.name + " found collision");
             // Check for a slope with an angle of steeper than 70 degrees
             if (Vector3.Angle(Vector3.up, hit.normal) > _maxSlopeAngle)
             {
                 // Stop the entity from moving up the slope
-                print("game object " + gameObject.name + " stopped from moving by incline check");
                 _moveDirection = _moveDirection - Vector3.Project(_moveDirection, hit.normal);
                 _moveDirection.y = 0f;
             }
