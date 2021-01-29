@@ -8,6 +8,7 @@ public class CrawlerMovement : MonoBehaviour
     private GroundMovement movement;
     private GameObject player;
     private Transform playerTrans;
+    public bool stayStill = false;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,11 @@ public class CrawlerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement.moveHorizontal((playerTrans.position - transform.position).normalized);
+        if(!stayStill)
+            movement.moveHorizontal((playerTrans.position - transform.position).normalized);
+    }
+
+    public Vector3 getMovDir(){
+        return (playerTrans.position - transform.position).normalized;
     }
 }
