@@ -1,0 +1,19 @@
+blender tut notes:
+
+Object view -> add -> mesh -> cube
+Edit mode with cube selected -> select all, subdivide
+delete other vertices except for small tall rectangle boy
+modifier -> mirror on x and y
+make the thing
+object mode, mirror effect dropdown arrow next to camera, apply
+edit mode shows all the vertices now
+object mode, add, armature
+can set armature to "always in front"
+edit mode on armature, add, bone
+can move two bone points around to where you want them
+select whole leg, shift+d to duplicate
+select duplicated leg s to scale, x for x axis, type "-1" to flip duplicated leg on x axis
+select child bone and then parent bone, make, parent, keep offset
+in object mode select skin, then bones, parent, armature deform type -> automatic weights
+can now use pose menu
+
