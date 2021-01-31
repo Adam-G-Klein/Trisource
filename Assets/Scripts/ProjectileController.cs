@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class ProjectileController : MonoBehaviour
 {
-    public float maxDistance = 200f;
+    public float timeToLive = 3f;
+
+    private float _damage = 25f;
     private float _speed = 10f;
     private Vector3 _moveDirection;
-    private Vector3 _startPosition;
+    private Rigidbody _body;
 
     // Start is called before the first frame update
     void Start()
@@ -23,28 +25,36 @@ public class ProjectileController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Rigidbody _body = GetComponent<Rigidbody>();
         _moveDirection = transform.TransformDirection(Vector3.forward);
         _body.MovePosition(_body.position + (_moveDirection * _speed * Time.fixedDeltaTime));
-        if (Vector3.Distance(transform.position, _startPosition) > maxDistance)
-        {
-            Object.Destroy(this.gameObject);
-        }
         return;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == "CrawlerEnemy")
+        {
+            other.gameObject.GetComponent<CrawlerInterface>().takeDamage(_damage);
+        }
         Object.Destroy(this.gameObject);
     }
 
-    public void setSpeed(float newSpeed)
+    public void initProjectile(float speed)
     {
-        _speed = newSpeed;
+        _speed = speed;
+        _body = GetComponent<Rigidbody>();
+        StartCoroutine(timeToLiveTimer());
     }
 
-    public void setStartPosition(Vector3 startPosition)
+    public void initProjectile(float speed, float newDamage)
     {
-        _startPosition = startPosition;
+        initProjectile(speed);
+        _damage = newDamage;
+    }
+
+    IEnumerator timeToLiveTimer()
+    {
+        yield return new WaitForSeconds(timeToLive);
+        Object.Destroy(this.gameObject);
     }
 }

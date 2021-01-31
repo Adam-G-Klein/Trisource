@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class PlayerInterface : MonoBehaviour
 {
+    private PlayerHealth _playerHealth;
     // Start is called before the first frame update
-
     void Start()
     {
-        
+        _playerHealth = GetComponent<PlayerHealth>();
     }
 
-    void takeDamage(float damage) {
-        print("called take damage on player! (comment this out when implemented)");
-        
+    public void takeDamage(float damage) 
+    {
+        _playerHealth.takeDamage(damage);
     }
 }
