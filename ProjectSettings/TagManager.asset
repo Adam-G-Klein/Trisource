@@ -9,11 +9,12 @@ TagManager:
   - Red Resource
   - Blue Resource
   - Yellow Resource
+  - Bone
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Crawlers
   - Water
   - UI
   - 

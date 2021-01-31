@@ -25,7 +25,8 @@ public class CrawlerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveCrawler();
+        if(!stayStill)
+            moveCrawler();
     }
 
     private void moveCrawler()
