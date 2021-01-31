@@ -18,7 +18,6 @@ public class CrawlerAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        setMovDir(movement.getMovDir());
         
     }
 

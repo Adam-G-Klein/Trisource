@@ -4,32 +4,38 @@ using UnityEngine;
 
 public class GroundMovement : MonoBehaviour
 {
-    public float speed = 6f;
     public float gravity = 9.81f;
 
+    private float _groundCheckDistance = 0.1f;
+    private float _speed;
     private Rigidbody _body;
     private Vector3 _moveDirection;
-    private float _checkSlopeDistance = 0.1f;
     private float _maxSlopeAngle = 70f;
     private bool _grounded;
-    private float _groundCheckDistance = 0.1f;
-    private Vector3 _verticalVelocity;
+    private bool _normalMovement = true;
+
+    /*private float _specialMovementSpeed;
+    private Vector3 _specialMovementDirection;
+    private float _stopSpecialMovementTime;*/
 
     // Start is called before the first frame update
     void Start()
     {
         // Get the rigidbody of the entity
         _body = GetComponent<Rigidbody>();
+        _speed = GetComponent<EntityConst>().speed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        return;
     }
 
     void FixedUpdate()
     {
-        doHorizontal();
+        if (_normalMovement)
+        {   doHorizontal(); }
         applyGravity();
     }
 
@@ -41,7 +47,7 @@ public class GroundMovement : MonoBehaviour
 
     private void doHorizontal()
     {
-        RaycastHit hit;
+        /*RaycastHit hit;
         // Check in front of the entity for a collision
         if (_body.SweepTest(_moveDirection, out hit, _checkSlopeDistance))
         {
@@ -52,9 +58,18 @@ public class GroundMovement : MonoBehaviour
                 _moveDirection = _moveDirection - Vector3.Project(_moveDirection, hit.normal);
                 _moveDirection.y = 0f;
             }
-        }
+        }*/
         // Move the entity towards the position
-        _body.MovePosition(_body.position + (_moveDirection * speed * Time.fixedDeltaTime));
+        _body.MovePosition(_body.position + (_moveDirection * _speed * Time.fixedDeltaTime));
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (Vector3.Angle(Vector3.up, collision.GetContact(0).normal) > _maxSlopeAngle)
+        {
+            _moveDirection = _moveDirection - Vector3.Project(_moveDirection, collision.GetContact(0).normal);
+            _moveDirection.y = 0f;
+        }
     }
 
     public void moveVertical(float verticalVelocity)
@@ -78,5 +93,25 @@ public class GroundMovement : MonoBehaviour
     public bool isGrounded()
     {
         return _grounded;
+    }
+
+    public void disableNormalMovement()
+    {
+        _normalMovement = false;
+    }
+
+    public void enableNormalMovementl()
+    {
+        _normalMovement = true;
+    }
+
+    public IEnumerator resumeNormalMovement()
+    {
+
+        for (; _body.velocity.magnitude < 0.1f;)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+        _normalMovement = true;
     }
 }
