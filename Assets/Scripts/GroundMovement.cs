@@ -14,9 +14,6 @@ public class GroundMovement : MonoBehaviour
     private bool _grounded;
     private bool _normalMovement = true;
 
-    /*private float _specialMovementSpeed;
-    private Vector3 _specialMovementDirection;
-    private float _stopSpecialMovementTime;*/
 
     // Start is called before the first frame update
     void Start()
@@ -47,20 +44,7 @@ public class GroundMovement : MonoBehaviour
 
     private void doHorizontal()
     {
-        /*RaycastHit hit;
-        // Check in front of the entity for a collision
-        if (_body.SweepTest(_moveDirection, out hit, _checkSlopeDistance))
-        {
-            // Check for a slope with an angle of steeper than 70 degrees
-            if (Vector3.Angle(Vector3.up, hit.normal) > _maxSlopeAngle)
-            {
-                // Stop the entity from moving up the slope
-                _moveDirection = _moveDirection - Vector3.Project(_moveDirection, hit.normal);
-                _moveDirection.y = 0f;
-            }
-        }*/
-        // Move the entity towards the position
-        _body.MovePosition(_body.position + (_moveDirection * _speed * Time.fixedDeltaTime));
+        _body.MovePosition(_body.position + (_moveDirection * _speed * Time.deltaTime));
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -88,6 +72,16 @@ public class GroundMovement : MonoBehaviour
         {
             _body.AddForce(new Vector3(0, -gravity * Time.deltaTime, 0), ForceMode.VelocityChange);
         }
+    }
+
+    public float getSpeed()
+    {
+        return _speed;
+    }
+
+    public void setSpeed(float speed)
+    {
+        _speed = speed;
     }
 
     public bool isGrounded()

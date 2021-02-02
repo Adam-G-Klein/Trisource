@@ -10,7 +10,7 @@ public class ShootProjectile : MonoBehaviour
 
     private bool _active = false;
     private bool _canShoot = true;
-    private float _shootWaitTime = 0.5f;
+    private float _shootWaitTime = 0.25f;
 
     // Start is called before the first frame update
     void Start()

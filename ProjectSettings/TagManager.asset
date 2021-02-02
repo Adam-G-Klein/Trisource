@@ -9,6 +9,7 @@ TagManager:
   - Red Resource
   - Blue Resource
   - Yellow Resource
+  - VisualManager
   layers:
   - Default
   - TransparentFX

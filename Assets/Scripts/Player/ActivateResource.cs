@@ -16,11 +16,13 @@ public class ActivateResource : MonoBehaviour
     private float _tetherTime = 0.5f;
     private bool _canTether = true;
 
+    private TetherVisuals tetherVisuals;
     private PlayerCameraController cameraController;
     private ShootProjectile shootProjectile;
     private ForcePush forcePush;
     private Renderer rightHand;
     private Renderer leftHand;
+    private GroundMovement movement;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +32,8 @@ public class ActivateResource : MonoBehaviour
         forcePush = GetComponent<ForcePush>();
         rightHand = transform.Find("Graphics/Hands/Right Hand").gameObject.GetComponent<Renderer>();
         leftHand = transform.Find("Graphics/Hands/Left Hand").gameObject.GetComponent<Renderer>();
+        tetherVisuals = GameObject.FindGameObjectWithTag("VisualManager").GetComponentInChildren<TetherVisuals>();
+        movement = GetComponent<GroundMovement>();
         return;
     }
 
@@ -38,12 +42,10 @@ public class ActivateResource : MonoBehaviour
     {
         bool hitSomething = false;
         RaycastHit hit = new RaycastHit();
-        GameObject newTether;
+        Vector3 tetherPoint;
 
         if (Input.GetMouseButtonDown(1) && _canTether)
         {
-            // DO THIS LATER
-            // newTether = Instantiate(tether, leftHand.transform.position, )
             hitSomething = Physics.Raycast(cameraController.cam.transform.position, cameraController.cam.transform.forward, out hit, _resourceDistance);
         }
         if (hitSomething)
@@ -53,18 +55,29 @@ public class ActivateResource : MonoBehaviour
             {
                 case "Red Resource":
                     activateRed();
+                    tetherPoint = getResourceTetherPoint(hit);
+                    tetherVisuals.tether(tetherPoint);
                     break;
 
                 case "Blue Resource":
                     activateBlue();
+                    tetherPoint = getResourceTetherPoint(hit);
+                    tetherVisuals.tether(tetherPoint);
                     break;
 
                 case "Yellow Resource":
                     activateYellow();
+                    tetherPoint = getResourceTetherPoint(hit);
+                    tetherVisuals.tether(tetherPoint);
                     break;
             }
         }
         return;
+    }
+
+    private Vector3 getResourceTetherPoint(RaycastHit hit)
+    {
+        return hit.collider.gameObject.transform.Find("TetherPoint").position;
     }
 
     void activateRed()
@@ -91,12 +104,17 @@ public class ActivateResource : MonoBehaviour
 
     void activateYellow()
     {
+        float speed;
         Debug.Log("activated yellow");
-        _yellowActive = true;
 
         deactivateBlue();
         deactivateRed();
-        // Something here
+        if (!_yellowActive)
+        {
+            speed = movement.getSpeed();
+            movement.setSpeed(speed * 3);
+        }
+        _yellowActive = true;
         setHands(yellowMaterial);
     }
 
@@ -114,8 +132,14 @@ public class ActivateResource : MonoBehaviour
 
     void deactivateYellow()
     {
+        float speed;
+        if (_yellowActive)
+        {
+            speed = movement.getSpeed();
+            movement.setSpeed(speed / 3);
+        }
         _yellowActive = false;
-        //shootProjectile.deactivate();
+        setHands(yellowMaterial);
     }
 
     void setHands(Material material)
