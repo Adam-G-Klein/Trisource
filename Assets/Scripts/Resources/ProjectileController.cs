@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProjectileController : MonoBehaviour
 {
     public float timeToLive = 3f;
+    public GameObject effect;
 
     private float _damage = 25f;
     private float _speed = 10f;
@@ -36,6 +37,7 @@ public class ProjectileController : MonoBehaviour
         {
             other.gameObject.GetComponent<CrawlerInterface>().takeDamage(_damage);
         }
+        Instantiate(effect, transform.position, new Quaternion(0, 0, 0, 0));
         Object.Destroy(this.gameObject);
     }
 

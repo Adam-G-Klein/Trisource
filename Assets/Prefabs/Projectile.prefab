@@ -158,3 +158,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToLive: 5
+  effect: {fileID: 6615177331699502447, guid: 9cb53ffdcfd4b354fad3b5dc619318c1, type: 3}

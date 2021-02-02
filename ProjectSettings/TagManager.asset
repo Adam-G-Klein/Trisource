@@ -10,6 +10,7 @@ TagManager:
   - Blue Resource
   - Yellow Resource
   - Bone
+  - VisualManager
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Crawlers
   - Water
   - UI
-  - 
+  - PostProcessing
   - 
   - 
   - 

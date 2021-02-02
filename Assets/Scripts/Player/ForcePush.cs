@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ForcePush : MonoBehaviour
 {
-    public float speed = 10f;
-    public float pushForce = 20f;
     public GameObject forcePush;
 
+    private float _speed;
+    private float _pushForce;
     private bool _canPush = true;
     private bool _active = false;
     private float _pushWaitTime = 3f;
@@ -37,7 +37,7 @@ public class ForcePush : MonoBehaviour
             newPush = Instantiate(forcePush, hands.transform.position + (hands.transform.TransformDirection(Vector3.forward) * 0.2f),
                                   new Quaternion(hands.transform.rotation.x, transform.rotation.y, hands.transform.rotation.z, transform.rotation.w)) as GameObject;
             newPushController = newPush.GetComponent<PushController>();
-            newPushController.initPush(speed, pushForce);
+            newPushController.initPush(_speed, _pushForce);
             _canPush = false;
             StartCoroutine(pushTimer());
         }
@@ -51,6 +51,16 @@ public class ForcePush : MonoBehaviour
     public void deactivate()
     {
         _active = false;
+    }
+
+    public void setSpeed(float speed)
+    {
+        _speed = speed;
+    }
+
+    public void setForce(float force)
+    {
+        _pushForce = force;
     }
 
     IEnumerator pushTimer()

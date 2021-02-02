@@ -13,14 +13,17 @@ public class ActivateResource : MonoBehaviour
     private bool _blueActive = false;
     private bool _yellowActive = false;
     private float _resourceDistance = 100f;
-    private float _tetherTime = 0.5f;
+    //private float _tetherTime = 0.5f;
     private bool _canTether = true;
 
+    private TetherVisuals tetherVisuals;
     private PlayerCameraController cameraController;
     private ShootProjectile shootProjectile;
     private ForcePush forcePush;
     private Renderer rightHand;
     private Renderer leftHand;
+    private GroundMovement movement;
+    private float _baseMoveSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +33,9 @@ public class ActivateResource : MonoBehaviour
         forcePush = GetComponent<ForcePush>();
         rightHand = transform.Find("Graphics/Hands/Right Hand").gameObject.GetComponent<Renderer>();
         leftHand = transform.Find("Graphics/Hands/Left Hand").gameObject.GetComponent<Renderer>();
+        tetherVisuals = GameObject.FindGameObjectWithTag("VisualManager").GetComponentInChildren<TetherVisuals>();
+        movement = GetComponent<GroundMovement>();
+        _baseMoveSpeed = GetComponent<EntityConst>().speed;
         return;
     }
 
@@ -38,12 +44,11 @@ public class ActivateResource : MonoBehaviour
     {
         bool hitSomething = false;
         RaycastHit hit = new RaycastHit();
-        GameObject newTether;
+        Vector3 tetherPoint;
+        ResourceConst resourceConst;
 
         if (Input.GetMouseButtonDown(1) && _canTether)
         {
-            // DO THIS LATER
-            // newTether = Instantiate(tether, leftHand.transform.position, )
             hitSomething = Physics.Raycast(cameraController.cam.transform.position, cameraController.cam.transform.forward, out hit, _resourceDistance);
         }
         if (hitSomething)
@@ -52,22 +57,36 @@ public class ActivateResource : MonoBehaviour
             switch((hit.collider.gameObject.tag))
             {
                 case "Red Resource":
-                    activateRed();
+                    resourceConst = hit.collider.gameObject.GetComponent<ResourceConst>();
+                    activateRed(resourceConst.projectileSpeed, resourceConst.projectileDamage);
+                    tetherPoint = getResourceTetherPoint(hit);
+                    tetherVisuals.tether(tetherPoint);
                     break;
 
                 case "Blue Resource":
-                    activateBlue();
+                    resourceConst = hit.collider.gameObject.GetComponent<ResourceConst>();
+                    activateBlue(resourceConst.pushSpeed, resourceConst.pushForce);
+                    tetherPoint = getResourceTetherPoint(hit);
+                    tetherVisuals.tether(tetherPoint);
                     break;
 
                 case "Yellow Resource":
-                    activateYellow();
+                    resourceConst = hit.collider.gameObject.GetComponent<ResourceConst>();
+                    activateYellow(resourceConst.zoomIncrease);
+                    tetherPoint = getResourceTetherPoint(hit);
+                    tetherVisuals.tether(tetherPoint);
                     break;
             }
         }
         return;
     }
 
-    void activateRed()
+    private Vector3 getResourceTetherPoint(RaycastHit hit)
+    {
+        return hit.collider.gameObject.transform.Find("TetherPoint").position;
+    }
+
+    void activateRed(float speed, float damage)
     {
         Debug.Log("activated red");
         _redActive = true;
@@ -75,10 +94,12 @@ public class ActivateResource : MonoBehaviour
         deactivateBlue();
         deactivateYellow();
         shootProjectile.activate();
+        shootProjectile.setDamage(damage);
+        shootProjectile.setSpeed(speed);
         setHands(redMaterial);
     }
 
-    void activateBlue()
+    void activateBlue(float speed, float force)
     {
         Debug.Log("activated blue");
         _blueActive = true;
@@ -86,17 +107,22 @@ public class ActivateResource : MonoBehaviour
         deactivateRed();
         deactivateYellow();
         forcePush.activate();
+        forcePush.setSpeed(speed);
+        forcePush.setForce(force);
         setHands(blueMaterial);
     }
 
-    void activateYellow()
+    void activateYellow(float increase)
     {
         Debug.Log("activated yellow");
-        _yellowActive = true;
 
         deactivateBlue();
         deactivateRed();
-        // Something here
+        if (!_yellowActive)
+        {
+            movement.setSpeed(_baseMoveSpeed * increase);
+        }
+        _yellowActive = true;
         setHands(yellowMaterial);
     }
 
@@ -114,8 +140,25 @@ public class ActivateResource : MonoBehaviour
 
     void deactivateYellow()
     {
+        float speed;
+        if (_yellowActive)
+        {
+            speed = movement.getSpeed();
+            movement.setSpeed(_baseMoveSpeed);
+        }
         _yellowActive = false;
-        //shootProjectile.deactivate();
+        setHands(yellowMaterial);
+    }
+
+    public int getActive()
+    {
+        if (_yellowActive)
+            return 1;
+        else if (_blueActive)
+            return 2;
+        else if (_redActive)
+            return 3;
+        return 0;
     }
 
     void setHands(Material material)
@@ -124,32 +167,3 @@ public class ActivateResource : MonoBehaviour
         leftHand.material = material;
     }
 }
-
-
-/*
- * IEnumerator TrailPlacer(Transform trail)
-    {
-        TrailController trailCont = trail.GetComponent<TrailController>();
-        Vector2 startPos = player.position;
-        Vector3 newAngs, newScale;
-        Vector2 newPos;
-        // + 90 due to experiment based implementation
-        newAngs = new Vector3(0, 0,mover.FindAngle(swiper.lastDir) + 90);
-        //this should be interruptable by another trail being formed
-        while (LeanTween.isTweening(mover.ltidMov) && !trailCont.isTrailPlaced())
-        {
-
-            newPos = (((Vector2)player.position - startPos) / 2) + startPos;
-            newScale = new Vector3(Vector2.Distance(startPos, player.position),
-                                    trail.localScale.y, trail.localScale.z);
-            //print(string.Format("angs: {0} pos: {1} scale: {2}", newAngs, newPos, newScale));
-            trail.eulerAngles = newAngs;
-            trail.localScale = newScale;
-
-            trail.position = newPos;
-            yield return new WaitForEndOfFrame();
-        }
-        trail.GetComponent<TrailController>().trailPlaced = true;
-        trailPlacing = false;
-    }
-*/
