@@ -32,20 +32,40 @@
  
          Debug.Log("Reassingning bones");
          SkinnedMeshRenderer rend = gameObject.GetComponent<SkinnedMeshRenderer>();
-         Transform[] bones = rend.bones;
+         Transform[] oldbones = rend.bones;
  
-         rend.rootBone = newArmature.Find(rootBoneName);
- 
-         Transform[] children = newArmature.GetComponentsInChildren<Transform>();
- 
-         for (int i = 0; i < bones.Length; i++)
-             for (int a = 0; a < children.Length; a++)
-                 if (bones[i].name == children[a].name) {
-                     bones[i] = children[a];
-                     break;
-                 }
- 
-         rend.bones = bones;
+        print("got existing bones: ");
+        foreach(Transform bone in oldbones){
+        print("\t" + bone.gameObject.name);
+        }
+        rend.rootBone = newArmature.Find(rootBoneName);
+
+        Transform[] children = newArmature.gameObject.GetComponentsInChildren<Transform>();
+        print("children of new armature: " );
+
+        List<Transform> newBones = new List<Transform>();
+
+        foreach(Transform child in children){
+            if(child.tag == "Bone"){
+                print("\t" + child.gameObject.name + " added to bones");
+                newBones.Add(child);
+            }
+        }
+
+        print("setting oldBones to newBones: ");
+
+        for (int i = 0; i < oldbones.Length; i++){
+            for (int a = 0; a < newBones.Count; a++){
+                print("\tchecked old" + oldbones[i].name + " against new " + newBones[i].name);
+                if (oldbones[i].name == newBones[a].name) {
+                    print("\tassigning new bone " + newBones[a].gameObject.name);
+                    oldbones[i] = newBones[a];
+                    break;
+                }
+            }
+        }
+
+        rend.bones = oldbones;
      }
 
 
