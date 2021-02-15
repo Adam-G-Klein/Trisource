@@ -91,6 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2995042656453251137}
   - component: {fileID: 2995042656453251136}
+  - component: {fileID: 6380998856654400987}
   m_Layer: 0
   m_Name: BlueResource
   m_TagString: Blue Resource
@@ -127,6 +128,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6380998856654400987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2995042656453251139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c3ab61a31faece4e808eeb2593a3b43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileSpeed: 20
+  projectileDamage: 25
 --- !u!1 &4256739307370948463
 GameObject:
   m_ObjectHideFlags: 0

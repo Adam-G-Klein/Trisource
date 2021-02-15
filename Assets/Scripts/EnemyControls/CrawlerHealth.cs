@@ -50,6 +50,11 @@ public class CrawlerHealth : MonoBehaviour
         }
     }
 
+    public float getHealthPercent()
+    {
+        return _health / _entityConst.maxHealth;
+    }
+
     IEnumerator damageTimer()
     {
         float elapsedTime = 0;

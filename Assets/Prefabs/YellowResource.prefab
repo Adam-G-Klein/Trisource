@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6584540680119760578}
   - component: {fileID: 6584540680119760577}
+  - component: {fileID: 4503256104685557171}
   m_Layer: 0
   m_Name: YellowResource
   m_TagString: Yellow Resource
@@ -76,6 +77,23 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4503256104685557171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6584540680119760576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c3ab61a31faece4e808eeb2593a3b43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileSpeed: 40
+  projectileDamage: 25
+  zoomIncrease: 2
+  pushSpeed: 25
+  pushForce: 30
 --- !u!1 &6584540681151920469
 GameObject:
   m_ObjectHideFlags: 0

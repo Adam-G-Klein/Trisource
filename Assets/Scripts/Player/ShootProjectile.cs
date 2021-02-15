@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ShootProjectile : MonoBehaviour
 {
-    public float speed = 30f;
-    public float damage = 25f;
     public GameObject projectile;
 
     private bool _active = false;
     private bool _canShoot = true;
     private float _shootWaitTime = 0.25f;
+    private float _speed = 30f;
+    private float _damage = 25f;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +39,7 @@ public class ShootProjectile : MonoBehaviour
                                         hand.transform.position + (hands.transform.TransformDirection(Vector3.forward) * 0.2f),
                                         new Quaternion(hands.transform.rotation.x, transform.rotation.y, hands.transform.rotation.z, transform.rotation.w)) as GameObject;
             newProjectileController = newProjectile.GetComponent<ProjectileController>();
-            newProjectileController.initProjectile(speed, damage);
+            newProjectileController.initProjectile(_speed, _damage);
             _canShoot = false;
             StartCoroutine(shootTimer());
         }
@@ -53,6 +53,16 @@ public class ShootProjectile : MonoBehaviour
     public void deactivate()
     {
         _active = false;
+    }
+
+    public void setSpeed(float speed)
+    {
+        _speed = speed;
+    }
+
+    public void setDamage(float damage)
+    {
+        _damage = damage;
     }
 
     IEnumerator shootTimer()
