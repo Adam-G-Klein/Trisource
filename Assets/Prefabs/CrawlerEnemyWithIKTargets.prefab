@@ -220,7 +220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3001680975947346850, guid: cdb5b265f147adf43a44639de937a237, type: 3}
       propertyPath: m_Name
-      value: CrawlerEnemy
+      value: AnimatedCrawlerEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 4538004867987730552, guid: cdb5b265f147adf43a44639de937a237, type: 3}
       propertyPath: ikTarget
