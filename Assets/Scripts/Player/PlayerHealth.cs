@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+    public float healthRegen = 25f;
+    private float regenWaitTime = 3f;
+
     private float _health;
     private Rigidbody _body;
     private EntityConst _entityConst;
+    private PlayerHealthVisuals _visuals;
+    private bool _canRegenHealth = false;
 
     // Start is called before the first frame update
     void Start()
@@ -14,18 +19,22 @@ public class PlayerHealth : MonoBehaviour
         _entityConst = GetComponent<EntityConst>();
         _health = _entityConst.maxHealth;
         _body = GetComponent<Rigidbody>();
+        _visuals = GameObject.FindGameObjectWithTag("VisualManager").GetComponentInChildren<PlayerHealthVisuals>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //print("Player Health: " + _health);
         return;
     }
 
     public void takeDamage(float damage)
     {
         _health -= damage;
+        _canRegenHealth = false;
+        _visuals.setHealth(_health / _entityConst.maxHealth);
+        StopCoroutine("regenTimer");
+        StartCoroutine("regenTimer");
         if (_health <= 0f)
         {
             killPlayer();
@@ -35,6 +44,24 @@ public class PlayerHealth : MonoBehaviour
     private void killPlayer()
     {
         _body.position = new Vector3(0f, 3f, 0f);
+        _visuals.setHealth(1f);
         _health = _entityConst.maxHealth;
+    }
+
+    IEnumerator regenTimer()
+    {
+        yield return new WaitForSeconds(regenWaitTime);
+        Debug.Log("Enabling Regeneration");
+        _canRegenHealth = true;
+        StartCoroutine(regenerateHealth());
+    }
+    IEnumerator regenerateHealth()
+    {
+        while (_health < 100f && _canRegenHealth == true)
+        {
+            _health += 1;
+            _visuals.setHealth(_health / _entityConst.maxHealth);
+            yield return new WaitForSeconds(1 / healthRegen);
+        }
     }
 }
