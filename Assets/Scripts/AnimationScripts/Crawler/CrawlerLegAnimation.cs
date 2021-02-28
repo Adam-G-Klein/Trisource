@@ -34,7 +34,7 @@ public class CrawlerLegAnimation : MonoBehaviour
                 maxRaycastDistance, layerMask))
         {
             Debug.DrawRay(transform.position, raycastDir * hit.distance, Color.yellow);
-            Debug.Log("Did Hit");
+            //Debug.Log("Did Hit");
         }
         else
         {

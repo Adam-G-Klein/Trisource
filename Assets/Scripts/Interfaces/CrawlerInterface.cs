@@ -5,14 +5,14 @@ using UnityEngine;
 public class CrawlerInterface : MonoBehaviour
 {
     private CrawlerHealth _crawlerHealth;
-    private GroundMovement _crawlerMovement;
     private Rigidbody _body;
+    private CrawlerMovement _movement;
     // Start is called before the first frame update
     void Start()
     {
         _crawlerHealth = GetComponent<CrawlerHealth>();
-        _crawlerMovement = GetComponent<GroundMovement>();
         _body = GetComponent<Rigidbody>();
+        _movement = GetComponent<CrawlerMovement>();
         return;
     }
 
@@ -29,9 +29,10 @@ public class CrawlerInterface : MonoBehaviour
 
     public void forcePushBack(Vector3 direction, float force)
     {
-        _crawlerMovement.disableNormalMovement();
+        _movement.disablePathing();
+        gameObject.layer = LayerMask.NameToLayer("ForcePushing");
         _body.AddForce(direction * force, ForceMode.VelocityChange);
-        StartCoroutine(_crawlerMovement.resumeNormalMovement());
+        StartCoroutine(_movement.doneBeingPushed());
     }
     
 }
