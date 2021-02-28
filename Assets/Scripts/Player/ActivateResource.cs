@@ -97,6 +97,7 @@ public class ActivateResource : MonoBehaviour
         shootProjectile.setDamage(damage);
         shootProjectile.setSpeed(speed);
         setHands(redMaterial);
+        tetherVisuals.setRed();
     }
 
     void activateBlue(float speed, float force)
@@ -110,6 +111,7 @@ public class ActivateResource : MonoBehaviour
         forcePush.setSpeed(speed);
         forcePush.setForce(force);
         setHands(blueMaterial);
+        tetherVisuals.setBlue();
     }
 
     void activateYellow(float increase)
@@ -124,6 +126,7 @@ public class ActivateResource : MonoBehaviour
         }
         _yellowActive = true;
         setHands(yellowMaterial);
+        tetherVisuals.setYellow();
     }
 
     void deactivateRed()

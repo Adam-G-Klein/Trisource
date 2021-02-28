@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class TetherVisuals : MonoBehaviour
 {
+    public Gradient blueGradient;
+    public Gradient redGradient;
+    public Gradient yellowGradient;
+
     private LineRenderer _tetherLine;
     private Vector3 _toPoint;
     private GameObject _leftHand;
@@ -57,5 +61,20 @@ public class TetherVisuals : MonoBehaviour
         _tetherLine.positionCount = 2;
         _tetherLine.SetPosition(0, _toPoint);
         _tetherLine.SetPosition(1, _toPoint);
+    }
+
+    public void setBlue()
+    {
+        _tetherLine.colorGradient = blueGradient;
+    }
+
+    public void setYellow()
+    {
+        _tetherLine.colorGradient = yellowGradient;
+    }
+
+    public void setRed()
+    {
+        _tetherLine.colorGradient = redGradient;
     }
 }
