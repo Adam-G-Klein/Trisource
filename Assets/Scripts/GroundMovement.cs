@@ -6,7 +6,7 @@ public class GroundMovement : MonoBehaviour
 {
     public float gravity = 9.81f;
 
-    private float _groundCheckDistance = 0.1f;
+    private float _groundCheckDistance = 0.2f;
     private float _speed;
     private Rigidbody _body;
     private Vector3 _moveDirection;

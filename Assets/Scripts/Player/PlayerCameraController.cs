@@ -17,19 +17,19 @@ public class PlayerCameraController : MonoBehaviour
     private float _turnSmoothVelocity;
 
     private float _firstPersonCamRotation = 0f;
-    private Transform _hands;
+    /*private Transform _hands;
     private Transform _leftHand;
     private Transform _rightHand;
-    private float _handsOffset = 0f;
+    private float _handsOffset = 0f;*/
 
     // Start is called before the first frame update
     void Start()
     {
         cam = GameObject.FindGameObjectWithTag("MainCamera");
         fpsCam = cam.GetComponent<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject;
-        _hands = transform.Find("Graphics/Hands");
+        /*_hands = transform.Find("Graphics/Hands");
         _leftHand = transform.Find("Graphics/Hands/Left Hand");
-        _rightHand = transform.Find("Graphics/Hands/Right Hand");
+        _rightHand = transform.Find("Graphics/Hands/Right Hand");*/
     }
 
     // Update is called once per frame
@@ -59,7 +59,7 @@ public class PlayerCameraController : MonoBehaviour
             _firstPersonCamRotation = Mathf.Clamp(_firstPersonCamRotation, -70f, 70f);
 
             fpsCam.transform.localRotation = Quaternion.Euler(_firstPersonCamRotation, 0f, 0f);
-            _hands.localRotation = Quaternion.Euler(_firstPersonCamRotation, 0f, 0f);
+            //_hands.localRotation = Quaternion.Euler(_firstPersonCamRotation, 0f, 0f);
             transform.Rotate(Vector3.up * mouseX);
         }
 

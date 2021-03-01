@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
     private EntityConst _entityConst;
     private PlayerHealthVisuals _visuals;
     private bool _canRegenHealth = false;
+    private LevelManager _manager;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
         _health = _entityConst.maxHealth;
         _body = GetComponent<Rigidbody>();
         _visuals = GameObject.FindGameObjectWithTag("VisualManager").GetComponentInChildren<PlayerHealthVisuals>();
+        _manager = GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>();
     }
 
     // Update is called once per frame
@@ -43,9 +45,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void killPlayer()
     {
-        _body.position = new Vector3(0f, 3f, 0f);
-        _visuals.setHealth(1f);
-        _health = _entityConst.maxHealth;
+        _manager.resetGame();
     }
 
     IEnumerator regenTimer()
