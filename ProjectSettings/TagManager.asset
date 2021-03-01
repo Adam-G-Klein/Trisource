@@ -11,6 +11,7 @@ TagManager:
   - Yellow Resource
   - Bone
   - VisualManager
+  - LevelManager
   layers:
   - Default
   - TransparentFX
