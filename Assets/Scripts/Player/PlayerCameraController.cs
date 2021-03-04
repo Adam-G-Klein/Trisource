@@ -11,7 +11,7 @@ public class PlayerCameraController : MonoBehaviour
     public bool firstPerson = true;
     public bool cameraLocked = true;
 
-    public float mouseSensitivity = 100f;
+    public float mouseSensitivity = 2f;
 
     public float turnSmoothTime = 0.1f;
     private float _turnSmoothVelocity;
@@ -46,8 +46,8 @@ public class PlayerCameraController : MonoBehaviour
         float vertical = Input.GetAxisRaw("Vertical");
 
         // For use of the first person camera
-        float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * mouseSensitivity;
-        float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * mouseSensitivity;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 

@@ -46,7 +46,7 @@ public class CrawlerHealth : MonoBehaviour
         _health -= damage;
         if (_health <= 0f)
         {
-            Object.Destroy(transform.parent.gameObject);
+            GetComponent<CrawlerInterface>().kill();
         }
     }
 

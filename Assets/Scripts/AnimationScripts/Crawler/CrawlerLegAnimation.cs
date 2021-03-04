@@ -39,7 +39,7 @@ public class CrawlerLegAnimation : MonoBehaviour
         else
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * maxRaycastDistance, Color.white);
-            Debug.Log("Did not Hit");
+            //Debug.Log("Did not Hit");
         }
         return hit.point;
 

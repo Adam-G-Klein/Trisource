@@ -83,7 +83,7 @@ Rigidbody:
   m_Drag: 2
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
@@ -109,12 +109,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3001680975947346850}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53a071367ccab1e44b2f72a400d3bd74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: 9.81
+  gravity: 19.62
 --- !u!114 &3001680975947346853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af1cae75428c602479573110e0be1826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effect: {fileID: 7170080923701064605, guid: 266ff560b0853ab45a2f9d37f6cd7ecd, type: 3}
 --- !u!65 &4501021107230722204
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -174,7 +175,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 3001680975947346850}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.75
   m_Speed: 3.5
   m_Acceleration: 99999
   avoidancePriority: 50

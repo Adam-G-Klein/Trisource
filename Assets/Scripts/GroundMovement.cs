@@ -10,6 +10,7 @@ public class GroundMovement : MonoBehaviour
     private float _speed;
     private Rigidbody _body;
     private Vector3 _moveDirection;
+    private Vector3 _gravity;
     private float _maxSlopeAngle = 70f;
     private bool _grounded;
     private bool _normalMovement = true;
@@ -65,12 +66,23 @@ public class GroundMovement : MonoBehaviour
     private void applyGravity()
     {
         RaycastHit hit;
+        bool prevGrounded = _grounded;
         // Check if the player is on the ground
         _grounded = _body.SweepTest(Vector3.down, out hit, _groundCheckDistance);
         // Handle gravity
         if (!_grounded)
         {
-            _body.AddForce(new Vector3(0, -gravity * Time.deltaTime, 0), ForceMode.VelocityChange);
+            if (prevGrounded)
+            {
+                // reduce the "floaty" feel of the gravity when jumping
+                _gravity.y = (-gravity/2) * Time.fixedDeltaTime;
+            }
+            _gravity.y = _gravity.y + -gravity * Time.fixedDeltaTime * Time.fixedDeltaTime;
+            _body.AddForce(_gravity, ForceMode.VelocityChange);
+        }
+        else
+        {
+            _gravity = Vector3.zero;
         }
     }
 

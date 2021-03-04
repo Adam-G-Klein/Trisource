@@ -338,7 +338,7 @@ MonoBehaviour:
   fpsCam: {fileID: 0}
   firstPerson: 1
   cameraLocked: 1
-  mouseSensitivity: 500
+  mouseSensitivity: 2
   turnSmoothTime: 0.1
 --- !u!114 &1329576120681813829
 MonoBehaviour:

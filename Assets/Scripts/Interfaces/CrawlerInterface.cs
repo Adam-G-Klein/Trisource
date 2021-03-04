@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CrawlerInterface : MonoBehaviour
 {
+    public GameObject effect;
+
     private CrawlerHealth _crawlerHealth;
     private Rigidbody _body;
     private CrawlerMovement _movement;
@@ -35,4 +37,9 @@ public class CrawlerInterface : MonoBehaviour
         StartCoroutine(_movement.doneBeingPushed());
     }
     
+    public void kill()
+    {
+        Instantiate(effect, transform.position, new Quaternion(0, 0, 0, 0));
+        Object.Destroy(transform.parent.gameObject);
+    }
 }
