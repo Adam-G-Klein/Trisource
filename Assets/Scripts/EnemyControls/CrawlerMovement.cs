@@ -58,6 +58,7 @@ public class CrawlerMovement : MonoBehaviour
             // check if its velocity is 0, meaning it hit the ground
             if (_body.velocity.magnitude < 0.1f)
             {
+                Debug.Log("Done falling");
                 // first check if took enough fall height to die
                 if (_startFallPoint.y - transform.position.y > 20f)
                 {
@@ -143,12 +144,18 @@ public class CrawlerMovement : MonoBehaviour
 
     public IEnumerator doneBeingPushed()
     {
+        _startFallPoint = transform.position;
         yield return new WaitForSeconds(0.1f);
         for (; _body.velocity.magnitude > 2f;)
         {
             yield return new WaitForFixedUpdate();
         }
         gameObject.layer = LayerMask.NameToLayer("Crawlers");
+        if (_startFallPoint.y - transform.position.y > 20f)
+        {
+            GetComponent<CrawlerInterface>().kill();
+            yield break;
+        }
         enablePathing();
     }
 }
