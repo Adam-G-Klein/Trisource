@@ -461,7 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d160fd6a428eec45b294907a0e28dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToChangeTo: MenuScene
+  sceneToChangeTo: 3
 --- !u!114 &493246553
 MonoBehaviour:
   m_ObjectHideFlags: 0
