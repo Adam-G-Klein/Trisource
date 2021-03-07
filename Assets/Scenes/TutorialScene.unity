@@ -461,7 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d160fd6a428eec45b294907a0e28dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToChangeTo: 3
+  sceneToChangeTo: MenuScene
 --- !u!114 &493246553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518,7 +518,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 493246555}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 493246552}
+        m_TargetAssemblyTypeName: SceneChangeButton, Assembly-CSharp
+        m_MethodName: clicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &493246555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,14 +735,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1532bfb2cf4a23a438caf7e8ecc4dd51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttons:
-  - {fileID: 1338273896}
-  - {fileID: 493246550}
-  images: []
-  buttonToTextAlphaRatio2: 0
   displayTime: 0.7
   initAlpha: 28
-  imageEndAlpha: 0.4
   initActive: 1
 --- !u!114 &719463029
 MonoBehaviour:

@@ -16,9 +16,8 @@ public class TextGroupAlphaControls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        textComps = transform.GetComponentsInChildren<TextMeshProUGUI>();
-        print("textcomps length: " + textComps.Length);
-
+        textComps = GetComponentsInChildren<TextMeshProUGUI>(true);
+        print("menu: " + gameObject.name + " textcomps length: " + textComps.Length);
         foreach (TextMeshProUGUI tm in textComps)
         {
             tm.alpha = initAlpha;

@@ -6,16 +6,16 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Clickable))]
 public class SceneChangeButton : MonoBehaviour
 {
-    public int sceneToChangeTo = 4;
+    public string sceneToChangeTo = "this";
     private Clickable clickable;
     // Start is called before the first frame update
     void Start()
     {
         clickable = GetComponent<Clickable>();
-        if (sceneToChangeTo == -1)
+        if (sceneToChangeTo == "this")
         {
             //indicates we want to change to this scene
-            sceneToChangeTo = SceneManager.GetActiveScene().buildIndex;
+            sceneToChangeTo = SceneManager.GetActiveScene().name;
         }
 
     }

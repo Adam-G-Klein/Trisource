@@ -6,19 +6,16 @@ using TMPro;
 
 public class ButtonGroupAlphaControls : MonoBehaviour
 {
-    public List<GameObject> buttons;
+    private List<GameObject> buttons = new List<GameObject>();
     private List<Clickable> clickables = new List<Clickable>();
-    public List<GameObject> images;
     private List<Material> buttonMats = new List<Material>();
     private List<SpriteRenderer> sprites = new List<SpriteRenderer>();
 
-    [SerializeField]
     private float buttonToTextAlphaRatio2 = 1 / 28;
     private float buttonToImageAlphaRatio = 1 / 60;
     private float maxButtonMatAlpha = 28;
     public float displayTime = 0.7f;
     public float initAlpha = 0;
-    public float imageEndAlpha = 0.4f;
     public bool initActive = false;
     private TextGroupAlphaControls textGroup;
 
@@ -26,6 +23,9 @@ public class ButtonGroupAlphaControls : MonoBehaviour
     void Start()
     {
         textGroup = GetComponent<TextGroupAlphaControls>();
+        Clickable[] buttonsArr = GetComponentsInChildren<Clickable>(true);
+        foreach(Clickable click in buttonsArr)
+            buttons.Add(click.gameObject);
 
         foreach (GameObject obj in buttons)
         {
@@ -35,14 +35,6 @@ public class ButtonGroupAlphaControls : MonoBehaviour
             clickables.Add(clickable);
             obj.SetActive(initActive);
             if(clickable) clickable.clickable = initActive;
-        }
-
-        foreach (GameObject obj in images)
-        {
-            SpriteRenderer renderer = obj.GetComponent<SpriteRenderer>();
-            renderer.color = new Color(renderer.color.r, renderer.color.b, renderer.color.g, initAlpha);
-            sprites.Add(renderer);
-            obj.SetActive(initActive);
         }
 
         foreach (Material mat in buttonMats)
@@ -80,13 +72,8 @@ public class ButtonGroupAlphaControls : MonoBehaviour
             obj.SetActive(true);
         }
 
-        foreach (GameObject img in images)
-        {
-            img.SetActive(true);
-        }
         if(textGroup) textGroup.displayAll();
         tweenButtonsAlphaTo(maxButtonMatAlpha, displayTime);
-        tweenImageAlphaTo(imageEndAlpha, displayTime);
         Invoke("setAllClickable", displayTime);
     }
 
@@ -109,7 +96,6 @@ public class ButtonGroupAlphaControls : MonoBehaviour
     public void hideAll()
     {
         tweenButtonsAlphaTo(0, displayTime);
-        tweenImageAlphaTo(0, displayTime);
         if(textGroup) textGroup.hideAll();
         setAllUnClickable(); //don't need to be clickable as they're fading out
         Invoke("deactivateAllButtons", displayTime);
@@ -124,18 +110,6 @@ public class ButtonGroupAlphaControls : MonoBehaviour
             .setOnUpdate((float val) =>
             {
                 mat.SetFloat("_publicAlpha", val);
-            });
-        }
-    }
-
-    public void tweenImageAlphaTo(float to, float time){
-        foreach (SpriteRenderer renderer in sprites)
-        {
-            LeanTween.value(
-            gameObject, renderer.color.a, to, time)
-            .setOnUpdate((float val) =>
-            {
-                renderer.color = new Color(renderer.color.r, renderer.color.b, renderer.color.g, val);
             });
         }
     }
