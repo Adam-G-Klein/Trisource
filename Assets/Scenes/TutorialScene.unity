@@ -327,14 +327,18 @@ MonoBehaviour:
     - Right click
     to tether to a resource
 
-    - left click to use a connected red or blue resource
+    - Left click to use a connected red or blue resource
+
+    -
+    Escape key to return to the main menu (don''t feel bad if you can''t beat a level,
+    it''ll still be good data on our google form!)
 
 
-    Thanks
-    in advance for all of your feedback!'
+    Thanks in advance for all
+    of your feedback!'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: eba4535a2f3ac0b44bbb6a7bac05b0aa, type: 2}
-  m_sharedMaterial: {fileID: 21734820958663162, guid: eba4535a2f3ac0b44bbb6a7bac05b0aa, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -695,7 +699,7 @@ GameObject:
   - component: {fileID: 719463028}
   - component: {fileID: 719463029}
   m_Layer: 5
-  m_Name: MainMenu
+  m_Name: Tutorial
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1047,6 +1051,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &958352235
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 958352236}
+  - component: {fileID: 958352237}
+  m_Layer: 0
+  m_Name: escape to menu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &958352236
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958352235}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 61, y: -42.614174, z: -764}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &958352237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 958352235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc8ecec3d492d3439811216702c7db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1321920722
 PrefabInstance:
   m_ObjectHideFlags: 0
