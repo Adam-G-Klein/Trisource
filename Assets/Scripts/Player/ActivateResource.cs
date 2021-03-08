@@ -7,7 +7,7 @@ public class ActivateResource : MonoBehaviour
     public Material redMaterial;
     public Material blueMaterial;
     public Material yellowMaterial;
-    public GameObject tether;
+    //public GameObject tether;
 
     private bool _redActive = false;
     private bool _blueActive = false;
@@ -23,7 +23,9 @@ public class ActivateResource : MonoBehaviour
     private Renderer rightHand;
     private Renderer leftHand;
     private GroundMovement movement;
+    private PlayerMovement playerMovement;
     private float _baseMoveSpeed;
+    private float _baseJumpHeight;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,8 @@ public class ActivateResource : MonoBehaviour
         tetherVisuals = GameObject.FindGameObjectWithTag("VisualManager").GetComponentInChildren<TetherVisuals>();
         movement = GetComponent<GroundMovement>();
         _baseMoveSpeed = GetComponent<EntityConst>().speed;
+        playerMovement = GetComponent<PlayerMovement>();
+        _baseJumpHeight = playerMovement.jumpHeight;
         return;
     }
 
@@ -72,7 +76,7 @@ public class ActivateResource : MonoBehaviour
 
                 case "Yellow Resource":
                     resourceConst = hit.collider.gameObject.GetComponent<ResourceConst>();
-                    activateYellow(resourceConst.zoomIncrease);
+                    activateYellow(resourceConst.zoomIncrease, resourceConst.jumpIncrease);
                     tetherPoint = getResourceTetherPoint(hit);
                     tetherVisuals.tether(tetherPoint);
                     break;
@@ -114,7 +118,7 @@ public class ActivateResource : MonoBehaviour
         tetherVisuals.setBlue();
     }
 
-    void activateYellow(float increase)
+    void activateYellow(float speedIncrease, float jumpIncrease)
     {
         Debug.Log("activated yellow");
 
@@ -122,7 +126,8 @@ public class ActivateResource : MonoBehaviour
         deactivateRed();
         if (!_yellowActive)
         {
-            movement.setSpeed(_baseMoveSpeed * increase);
+            movement.setSpeed(_baseMoveSpeed * speedIncrease);
+            playerMovement.jumpHeight = _baseJumpHeight * jumpIncrease;
         }
         _yellowActive = true;
         setHands(yellowMaterial);
@@ -148,6 +153,7 @@ public class ActivateResource : MonoBehaviour
         {
             speed = movement.getSpeed();
             movement.setSpeed(_baseMoveSpeed);
+            playerMovement.jumpHeight = _baseJumpHeight;
         }
         _yellowActive = false;
         setHands(yellowMaterial);

@@ -13,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     private AdvancedCollisionDetector detector;
     private ActivateResource activeResource;
     private Vector3 _inputs = Vector3.zero;
+    private bool _prevGrounded = false;
+    private Vector3 _lastHeight;
+    private PlayerInterface _interface;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
         _moveController = GetComponent<GroundMovement>();
         detector = GetComponentInChildren<AdvancedCollisionDetector>();
         activeResource = GetComponent<ActivateResource>();
+        _lastHeight = transform.position;
+        _interface = GetComponent<PlayerInterface>();
     }
 
     void FixedUpdate()
@@ -36,10 +41,22 @@ public class PlayerMovement : MonoBehaviour
         {
             moveDir = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f) * _inputs;
         }
+        checkFallDamage();
         moveDir = moveDir.normalized;
         if (activeResource.getActive() == 1)
             moveDir = detector.detectCollision(moveDir);
         _moveController.moveHorizontal(moveDir);
+    }
+
+    void checkFallDamage()
+    {
+        if(_prevGrounded == false && _moveController.isGrounded())
+        {
+            if (_lastHeight.y - transform.position.y > 20f)
+            {
+                _interface.killPlayer();
+            }
+        }
     }
 
     // Update is called once per frame

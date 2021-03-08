@@ -18,6 +18,7 @@ public class CrawlerMovement : MonoBehaviour
     private Vector3 _startFallPoint;
     private float _moveBackTime = 1f;
     private bool _isFalling = false;
+    private bool _beingPushed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +30,7 @@ public class CrawlerMovement : MonoBehaviour
         _agent.speed = _const.speed;
         _body = GetComponent<Rigidbody>();
         _moveController = GetComponent<GroundMovement>();
-        _moveController.enabled = false;
+        _isFalling = !_moveController.isGrounded();
     }
 
     // Update is called once per frame
@@ -41,36 +42,29 @@ public class CrawlerMovement : MonoBehaviour
     void movement()
     {
         NavMeshHit hit;
-        // If the nav mesh agent is enabled but falls off of the nav mesh
-        if (_agent.enabled == true && !_agent.isOnNavMesh && _isFalling == false)
+        // If the crawler isn't grounded and is currently not already falling
+        if (!_moveController.isGrounded() && _isFalling == false)
         {
             // disable nav mesh pathing and enable falling
             disablePathing();
             _moveController.enabled = true;
             _startFallPoint = transform.position;
-            // give the crawler a small amount of time to actually start falling
-            // before the next if statement immediately happens and its magnitude is low
-            StartCoroutine(fallingTimer());
+            _isFalling = true;
         }
-        // if the crawler is already falling 
-        else if (_isFalling)
+        // if the crawler is already falling and hits the ground
+        else if (_isFalling && _moveController.isGrounded() && !_beingPushed)
         {
-            // check if its velocity is 0, meaning it hit the ground
-            if (_body.velocity.magnitude < 0.1f)
+            // first check if took enough fall height to die
+            if (_startFallPoint.y - transform.position.y > 20f)
             {
-                Debug.Log("Done falling");
-                // first check if took enough fall height to die
-                if (_startFallPoint.y - transform.position.y > 20f)
-                {
-                    GetComponent<CrawlerInterface>().kill();
-                }
-                // stop its falling and turn back on pathing
-                _isFalling = false;
-                enablePathing();
-                // put the nav mesh agent back on the nav mesh
-                NavMesh.SamplePosition(transform.position, out hit, 0.5f, NavMesh.AllAreas);
-                _agent.Warp(hit.position);
+                GetComponent<CrawlerInterface>().kill();
             }
+            // stop its falling and turn back on pathing
+            _isFalling = false;
+            enablePathing();
+            // put the nav mesh agent back on the nav mesh
+            NavMesh.SamplePosition(transform.position, out hit, 0.5f, NavMesh.AllAreas);
+            _agent.Warp(hit.position);
         }
 
 
@@ -144,6 +138,7 @@ public class CrawlerMovement : MonoBehaviour
 
     public IEnumerator doneBeingPushed()
     {
+        _beingPushed = true;
         _startFallPoint = transform.position;
         yield return new WaitForSeconds(0.1f);
         for (; _body.velocity.magnitude > 2f;)
@@ -154,8 +149,8 @@ public class CrawlerMovement : MonoBehaviour
         if (_startFallPoint.y - transform.position.y > 20f)
         {
             GetComponent<CrawlerInterface>().kill();
-            yield break;
         }
         enablePathing();
+        _beingPushed = false;
     }
 }

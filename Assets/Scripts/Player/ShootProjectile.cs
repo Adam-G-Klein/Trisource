@@ -12,9 +12,13 @@ public class ShootProjectile : MonoBehaviour
     private float _speed = 30f;
     private float _damage = 25f;
 
+    private Transform hands;
+    private Transform hand;
     // Start is called before the first frame update
     void Start()
     {
+        hands = transform.Find("Graphics/Hands");
+        hand = transform.Find("Graphics/Hands/Right Hand");
         return;
     }
 
@@ -29,15 +33,11 @@ public class ShootProjectile : MonoBehaviour
     {
         GameObject newProjectile;
         ProjectileController newProjectileController;
-        GameObject hand;
-        GameObject hands;
         if ((Input.GetMouseButtonDown(0) | Input.GetMouseButton(0)) && _canShoot)
         {
-            hands = transform.Find("Graphics/Hands").gameObject;
-            hand = transform.Find("Graphics/Hands/Right Hand").gameObject;
             newProjectile = Instantiate(projectile,
-                                        hand.transform.position + (hands.transform.TransformDirection(Vector3.forward) * 0.2f),
-                                        new Quaternion(hands.transform.rotation.x, transform.rotation.y, hands.transform.rotation.z, transform.rotation.w)) as GameObject;
+                                        hand.position + (hands.TransformDirection(Vector3.forward) * 0.2f),
+                                        hands.rotation) as GameObject;
             newProjectileController = newProjectile.GetComponent<ProjectileController>();
             newProjectileController.initProjectile(_speed, _damage);
             _canShoot = false;

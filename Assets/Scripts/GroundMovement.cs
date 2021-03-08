@@ -6,7 +6,7 @@ public class GroundMovement : MonoBehaviour
 {
     public float gravity = 9.81f;
 
-    private float _groundCheckDistance = 0.2f;
+    private float _groundCheckDistance = 0.1f;
     private float _speed;
     private Rigidbody _body;
     private Vector3 _moveDirection;
@@ -15,6 +15,7 @@ public class GroundMovement : MonoBehaviour
     private bool _grounded;
     private bool _normalMovement = true;
 
+    private List<Transform> _downPointsList = new List<Transform>();
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,16 @@ public class GroundMovement : MonoBehaviour
         // Get the rigidbody of the entity
         _body = GetComponent<Rigidbody>();
         _speed = GetComponent<EntityConst>().speed;
+        setupDownPointsList();
+    }
+
+    void setupDownPointsList()
+    {
+        _downPointsList.Add(transform.Find("CastPoints/Down/d_northwest"));
+        _downPointsList.Add(transform.Find("CastPoints/Down/d_northeast"));
+        _downPointsList.Add(transform.Find("CastPoints/Down/d_southwest"));
+        _downPointsList.Add(transform.Find("CastPoints/Down/d_southeast"));
+        _downPointsList.Add(transform.Find("CastPoints/Down/d_center"));
     }
 
     // Update is called once per frame
@@ -65,10 +76,9 @@ public class GroundMovement : MonoBehaviour
 
     private void applyGravity()
     {
-        RaycastHit hit;
         bool prevGrounded = _grounded;
         // Check if the player is on the ground
-        _grounded = _body.SweepTest(Vector3.down, out hit, _groundCheckDistance);
+        _grounded = checkGrounded();
         // Handle gravity
         if (!_grounded)
         {
@@ -84,6 +94,17 @@ public class GroundMovement : MonoBehaviour
         {
             _gravity = Vector3.zero;
         }
+    }
+
+    private bool checkGrounded()
+    {
+        RaycastHit hit;
+        for (int i = 0; i < _downPointsList.Count; i++)
+        {
+            if (Physics.Raycast(_downPointsList[i].position, -transform.up, out hit, _groundCheckDistance))
+                return true;
+        }
+        return false;
     }
 
     public float getSpeed()

@@ -8,6 +8,7 @@ public class ResourceConst : MonoBehaviour
     public float projectileDamage = 25f;
 
     public float zoomIncrease = 2f;
+    public float jumpIncrease = 2f;
 
     public float pushSpeed = 25f;
     public float pushForce = 30f;
