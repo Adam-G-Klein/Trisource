@@ -26,6 +26,7 @@ public class ActivateResource : MonoBehaviour
     private PlayerMovement playerMovement;
     private float _baseMoveSpeed;
     private float _baseJumpHeight;
+    private bool _hover = true;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +47,7 @@ public class ActivateResource : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _hover = true;
         bool hitSomething = false;
         RaycastHit hit = new RaycastHit();
         Vector3 tetherPoint;
@@ -54,8 +56,13 @@ public class ActivateResource : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && _canTether)
         {
             hitSomething = Physics.Raycast(cameraController.cam.transform.position, cameraController.cam.transform.forward, out hit, _resourceDistance);
+            _hover = false;
         }
-        if (hitSomething)
+        else
+        {
+            hitSomething = Physics.Raycast(cameraController.cam.transform.position, cameraController.cam.transform.forward, out hit, _resourceDistance);
+        }
+        if (hitSomething && !_hover)
         {
             hitSomething = false;
             switch((hit.collider.gameObject.tag))
@@ -79,6 +86,18 @@ public class ActivateResource : MonoBehaviour
                     activateYellow(resourceConst.zoomIncrease, resourceConst.jumpIncrease);
                     tetherPoint = getResourceTetherPoint(hit);
                     tetherVisuals.tether(tetherPoint);
+                    break;
+            }
+        }
+        else if (hitSomething && _hover)
+        {
+            hitSomething = false;
+            switch ((hit.collider.gameObject.tag))
+            {
+                case "Red Resource":
+                case "Blue Resource":
+                case "Yellow Resource":
+                    hit.collider.gameObject.GetComponent<HoverOver>().setHover();
                     break;
             }
         }

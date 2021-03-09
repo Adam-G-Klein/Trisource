@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour
 
     public void resetGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void loadLevel(string level)

@@ -12,6 +12,7 @@ public class LevelPortal : MonoBehaviour
     private ParticleSystem _particleSystem;
     private Collider _collider;
     private bool _enabled;
+    private GameObject _light;
 
     private void Start()
     {
@@ -19,6 +20,7 @@ public class LevelPortal : MonoBehaviour
         _particleSystem = GetComponent<ParticleSystem>();
         _collider = GetComponent<CapsuleCollider>();
         _enabled = !spawnOnEnemiesDefeated;
+        _light = transform.Find("Point Light").gameObject;
     }
 
     private void Update()
@@ -35,10 +37,12 @@ public class LevelPortal : MonoBehaviour
         {
             _particleSystem.Stop();
             _collider.enabled = false;
+            _light.SetActive(false);
         }
         else
         {
             _particleSystem.Play();
+            _light.SetActive(true);
             _collider.enabled = true;
         }
     }
