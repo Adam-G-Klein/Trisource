@@ -137,7 +137,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2160603376074869470, guid: f61a01622bbf5a0498dcc82faa4c31d4, type: 3}
       propertyPath: projectileDamage
-      value: 10
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 4686477674943739529, guid: f61a01622bbf5a0498dcc82faa4c31d4, type: 3}
       propertyPath: m_NavMeshLayer
