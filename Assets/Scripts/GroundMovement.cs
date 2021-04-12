@@ -107,6 +107,17 @@ public class GroundMovement : MonoBehaviour
         return false;
     }
 
+    public bool checkApproximatelyGrounded()
+    {
+        RaycastHit hit;
+        for (int i = 0; i < _downPointsList.Count; i++)
+        {
+            if (Physics.Raycast(_downPointsList[i].position, -transform.up, out hit, _groundCheckDistance*2))
+                return true;
+        }
+        return false;
+    }
+
     public float getSpeed()
     {
         return _speed;

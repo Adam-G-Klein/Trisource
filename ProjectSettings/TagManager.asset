@@ -12,6 +12,7 @@ TagManager:
   - Bone
   - VisualManager
   - LevelManager
+  - AudioManager
   layers:
   - Default
   - TransparentFX

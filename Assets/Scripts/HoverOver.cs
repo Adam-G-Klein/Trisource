@@ -29,6 +29,5 @@ public class HoverOver : MonoBehaviour
     {
         _renderer.material = hoverMaterial;
         _setMaterial = true;
-        Debug.Log("test");
     }
 }

@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _prevGrounded = false;
     private Vector3 _lastHeight;
     private PlayerInterface _interface;
+    private AudioManager _audioManager;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
         activeResource = GetComponent<ActivateResource>();
         _lastHeight = transform.position;
         _interface = GetComponent<PlayerInterface>();
+        _audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     void FixedUpdate()
@@ -45,6 +47,14 @@ public class PlayerMovement : MonoBehaviour
         moveDir = moveDir.normalized;
         if (activeResource.getActive() == 1)
             moveDir = detector.detectCollision(moveDir);
+        if (moveDir.magnitude > 0 && _moveController.checkApproximatelyGrounded())
+        {
+            _audioManager.playSteps(_moveController.getSpeed());
+        }
+        else
+        {
+            _audioManager.stopSteps();
+        }
         _moveController.moveHorizontal(moveDir);
     }
 

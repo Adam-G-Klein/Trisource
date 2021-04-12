@@ -19,12 +19,15 @@ public class ForcePush : MonoBehaviour
 
     private GameObject hands;
 
+    private AudioManager _audioManager;
+
     // Start is called before the first frame update
     void Start()
     {
         hands = transform.Find("Graphics/Hands").gameObject;
         rightHandRenderer = transform.Find("Graphics/Hands/Right Hand").gameObject.GetComponent<Renderer>();
         leftHandRenderer = transform.Find("Graphics/Hands/Left Hand").gameObject.GetComponent<Renderer>();
+        _audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         return;
     }
 
@@ -46,6 +49,7 @@ public class ForcePush : MonoBehaviour
                                   new Quaternion(hands.transform.rotation.x, transform.rotation.y, hands.transform.rotation.z, transform.rotation.w)) as GameObject;
             newPushController = newPush.GetComponent<PushController>();
             newPushController.initPush(_speed, _pushForce);
+            _audioManager.playForcePush();
             startCooldown();
         }
     }
@@ -60,7 +64,8 @@ public class ForcePush : MonoBehaviour
     void endCooldown()
     {
         _canPush = true;
-        setHands(defaultHands);
+        if (_active)
+            setHands(defaultHands);
     }
 
     void setHands(Material material)

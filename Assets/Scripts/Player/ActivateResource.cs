@@ -7,13 +7,11 @@ public class ActivateResource : MonoBehaviour
     public Material redMaterial;
     public Material blueMaterial;
     public Material yellowMaterial;
-    //public GameObject tether;
 
     private bool _redActive = false;
     private bool _blueActive = false;
     private bool _yellowActive = false;
     private float _resourceDistance = 100f;
-    //private float _tetherTime = 0.5f;
     private bool _canTether = true;
 
     private TetherVisuals tetherVisuals;
@@ -24,6 +22,7 @@ public class ActivateResource : MonoBehaviour
     private Renderer leftHand;
     private GroundMovement movement;
     private PlayerMovement playerMovement;
+    private AudioManager _audioManager;
     private float _baseMoveSpeed;
     private float _baseJumpHeight;
     private bool _hover = true;
@@ -41,6 +40,7 @@ public class ActivateResource : MonoBehaviour
         _baseMoveSpeed = GetComponent<EntityConst>().speed;
         playerMovement = GetComponent<PlayerMovement>();
         _baseJumpHeight = playerMovement.jumpHeight;
+        _audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         return;
     }
 
@@ -147,6 +147,9 @@ public class ActivateResource : MonoBehaviour
         {
             movement.setSpeed(_baseMoveSpeed * speedIncrease);
             playerMovement.jumpHeight = _baseJumpHeight * jumpIncrease;
+            _audioManager.playYellow();
+            _audioManager.stopSteps();
+            _audioManager.playSteps(_baseMoveSpeed * speedIncrease);
         }
         _yellowActive = true;
         setHands(yellowMaterial);
@@ -173,6 +176,9 @@ public class ActivateResource : MonoBehaviour
             speed = movement.getSpeed();
             movement.setSpeed(_baseMoveSpeed);
             playerMovement.jumpHeight = _baseJumpHeight;
+            _audioManager.stopYellow();
+            _audioManager.stopSteps();
+            _audioManager.playSteps(_baseMoveSpeed);
         }
         _yellowActive = false;
         setHands(yellowMaterial);

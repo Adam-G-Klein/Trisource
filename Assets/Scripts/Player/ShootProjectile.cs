@@ -14,11 +14,14 @@ public class ShootProjectile : MonoBehaviour
 
     private Transform hands;
     private Transform hand;
+
+    private AudioManager audioManager;
     // Start is called before the first frame update
     void Start()
     {
         hands = transform.Find("Graphics/Hands");
         hand = transform.Find("Graphics/Hands/Right Hand");
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         return;
     }
 
@@ -41,6 +44,7 @@ public class ShootProjectile : MonoBehaviour
             newProjectileController = newProjectile.GetComponent<ProjectileController>();
             newProjectileController.initProjectile(_speed, _damage);
             _canShoot = false;
+            audioManager.playFireProjectile();
             StartCoroutine(shootTimer());
         }
     }
