@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
     void checkJump()
     {
         // Check for a jump
-        if (Input.GetButtonDown("Jump") && _moveController.isGrounded())
+        if (Input.GetButtonDown("Jump") && _moveController.checkApproximatelyGrounded())
         {
             _moveController.moveVertical(Mathf.Sqrt(jumpHeight * 2.0f * _moveController.gravity));
         }
