@@ -195,6 +195,13 @@ public class ActivateResource : MonoBehaviour
         return 0;
     }
 
+    public void deactivateAll()
+    {
+        deactivateBlue();
+        deactivateRed();
+        deactivateYellow();
+    }
+
     void setHands(Material material)
     {
         rightHand.material = material;

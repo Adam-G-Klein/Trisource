@@ -64,8 +64,10 @@ public class PlayerMovement : MonoBehaviour
         {
             if (_lastHeight.y - transform.position.y > 20f)
             {
+                Debug.Log("player being killed");
                 _interface.killPlayer();
             }
+            _lastHeight.y = transform.position.y;
         }
     }
 

@@ -26,7 +26,7 @@ public class PlayerCameraController : MonoBehaviour
     void Start()
     {
         cam = GameObject.FindGameObjectWithTag("MainCamera");
-        fpsCam = cam.GetComponent<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject;
+        //fpsCam = cam.GetComponent<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject;
         /*_hands = transform.Find("Graphics/Hands");
         _leftHand = transform.Find("Graphics/Hands/Left Hand");
         _rightHand = transform.Find("Graphics/Hands/Right Hand");*/
