@@ -7,6 +7,7 @@ public class ActivateResource : MonoBehaviour
     public Material redMaterial;
     public Material blueMaterial;
     public Material yellowMaterial;
+    public Material untethered;
 
     private bool _redActive = false;
     private bool _blueActive = false;
@@ -181,7 +182,6 @@ public class ActivateResource : MonoBehaviour
             _audioManager.playSteps(_baseMoveSpeed);
         }
         _yellowActive = false;
-        setHands(yellowMaterial);
     }
 
     public int getActive()
@@ -200,6 +200,8 @@ public class ActivateResource : MonoBehaviour
         deactivateBlue();
         deactivateRed();
         deactivateYellow();
+        setHands(untethered);
+        tetherVisuals.untether();
     }
 
     void setHands(Material material)

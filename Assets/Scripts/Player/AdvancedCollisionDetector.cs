@@ -38,7 +38,7 @@ public class AdvancedCollisionDetector : MonoBehaviour
         {
             for (int i = 0; i < _forwardPointsList.Count; i++)
             {
-                _forwardCheckList[i] = Physics.Raycast(_forwardPointsList[i].position, transform.forward, out hit, _castDistance);
+                _forwardCheckList[i] = Physics.Raycast(_forwardPointsList[i].position, transform.forward, out hit, _castDistance, Physics.IgnoreRaycastLayer);
                 _forwardHitList[i] = hit;
                 if (_forwardCheckList[i])
                 {
@@ -51,7 +51,7 @@ public class AdvancedCollisionDetector : MonoBehaviour
         {
             for (int i = 0; i < _forwardPointsList.Count; i++)
             {
-                _backCheckList[i] = Physics.Raycast(_backPointsList[i].position, -transform.forward, out hit, _castDistance);
+                _backCheckList[i] = Physics.Raycast(_backPointsList[i].position, -transform.forward, out hit, _castDistance, Physics.IgnoreRaycastLayer);
                 _backHitList[i] = hit;
                 if (_backCheckList[i])
                 {
@@ -64,7 +64,7 @@ public class AdvancedCollisionDetector : MonoBehaviour
         {
             for (int i = 0; i < _namesList.Count; i++)
             {
-                _leftCheckList[i] = Physics.Raycast(_leftPointsList[i].position, -transform.right, out hit, _castDistance);
+                _leftCheckList[i] = Physics.Raycast(_leftPointsList[i].position, -transform.right, out hit, _castDistance, Physics.IgnoreRaycastLayer);
                 _leftHitList[i] = hit;
                 if (_leftCheckList[i])
                 {
@@ -77,7 +77,7 @@ public class AdvancedCollisionDetector : MonoBehaviour
         {
             for (int i = 0; i < _namesList.Count; i++)
             {
-                _rightCheckList[i] = Physics.Raycast(_rightPointsList[i].position, transform.right, out hit, _castDistance);
+                _rightCheckList[i] = Physics.Raycast(_rightPointsList[i].position, transform.right, out hit, _castDistance, Physics.IgnoreRaycastLayer);
                 _rightHitList[i] = hit;
                 if (_rightCheckList[i])
                 {
