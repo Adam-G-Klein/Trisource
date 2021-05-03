@@ -112,7 +112,7 @@ public class GroundMovement : MonoBehaviour
         RaycastHit hit;
         for (int i = 0; i < _downPointsList.Count; i++)
         {
-            if (Physics.Raycast(_downPointsList[i].position, -transform.up, out hit, _groundCheckDistance*2.5f))
+            if (Physics.Raycast(_downPointsList[i].position, -transform.up, out hit, _groundCheckDistance*3f))
                 return true;
         }
         return false;

@@ -63,6 +63,12 @@ public class TetherVisuals : MonoBehaviour
         _tetherLine.SetPosition(1, _toPoint);
     }
 
+    public void untether()
+    {
+        _tetherLine.positionCount = 1;
+        _drawingTether = false;
+    }
+
     public void setBlue()
     {
         _tetherLine.colorGradient = blueGradient;
