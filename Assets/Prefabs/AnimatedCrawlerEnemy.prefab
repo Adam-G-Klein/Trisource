@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 5189374776390639002}
   - component: {fileID: 4501021107230722204}
   - component: {fileID: 5415336625560197662}
+  - component: {fileID: 4783264013522888724}
   m_Layer: 3
   m_Name: AnimatedCrawlerEnemy
   m_TagString: CrawlerEnemy
@@ -161,7 +162,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3001680975947346850}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 70020affecc6f444cbf18e5c1980dc0c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -189,6 +190,25 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &4783264013522888724
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3001680975947346850}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 92a9cfb4107be904b88357bb9037aae5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &2569053644427069777
 PrefabInstance:
   m_ObjectHideFlags: 0

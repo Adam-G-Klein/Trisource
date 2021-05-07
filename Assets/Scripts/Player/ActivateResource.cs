@@ -12,7 +12,7 @@ public class ActivateResource : MonoBehaviour
     private bool _redActive = false;
     private bool _blueActive = false;
     private bool _yellowActive = false;
-    private float _resourceDistance = 100f;
+    private float _resourceDistance = 200f;
     private bool _canTether = true;
 
     private TetherVisuals tetherVisuals;

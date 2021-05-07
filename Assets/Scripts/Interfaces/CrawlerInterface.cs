@@ -21,6 +21,7 @@ public class CrawlerInterface : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(_body.velocity.magnitude);
         return;
     }
 
@@ -33,7 +34,8 @@ public class CrawlerInterface : MonoBehaviour
     {
         _movement.disablePathing();
         gameObject.layer = LayerMask.NameToLayer("ForcePushing");
-        _body.AddForce(direction * force, ForceMode.VelocityChange);
+        _body.velocity = direction * force;
+        //_body.AddForce(direction * force, ForceMode.VelocityChange);
         StartCoroutine(_movement.doneBeingPushed());
     }
     

@@ -54,6 +54,7 @@ public class CrawlerMovement : MonoBehaviour
         // if the crawler is already falling and hits the ground
         else if (_isFalling && _moveController.isGrounded() && !_beingPushed)
         {
+            Debug.Log("hit ground");
             // first check if took enough fall height to die
             if (_startFallPoint.y - transform.position.y > 20f)
             {
@@ -61,10 +62,10 @@ public class CrawlerMovement : MonoBehaviour
             }
             // stop its falling and turn back on pathing
             _isFalling = false;
-            enablePathing();
             // put the nav mesh agent back on the nav mesh
-            NavMesh.SamplePosition(transform.position, out hit, 0.5f, NavMesh.AllAreas);
-            _agent.Warp(hit.position);
+            if (NavMesh.SamplePosition(transform.position, out hit, 0.5f, NavMesh.AllAreas))
+                transform.position = hit.position;
+            enablePathing();
         }
 
 
