@@ -28,6 +28,8 @@ public class ActivateResource : MonoBehaviour
     private float _baseJumpHeight;
     private bool _hover = true;
 
+    private PlayerInterface _playerInterface;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +44,7 @@ public class ActivateResource : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         _baseJumpHeight = playerMovement.jumpHeight;
         _audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+        _playerInterface = GetComponent<PlayerInterface>();
         return;
     }
 
@@ -87,6 +90,13 @@ public class ActivateResource : MonoBehaviour
                     activateYellow(resourceConst.zoomIncrease, resourceConst.jumpIncrease);
                     tetherPoint = getResourceTetherPoint(hit);
                     tetherVisuals.tether(tetherPoint);
+                    break;
+
+                case "Checkpoint":
+                    tetherPoint = hit.collider.gameObject.transform.position;
+                    tetherVisuals.checkpointTether(tetherPoint);
+                    tetherVisuals.setCheckpoint();
+                    _playerInterface.checkpoint(hit.collider.gameObject.transform.Find("Respawn Point").transform.position);
                     break;
             }
         }

@@ -446,6 +446,7 @@ MonoBehaviour:
   redMaterial: {fileID: 2100000, guid: b0a8f8bae3b41f54ab48945bd3603bf5, type: 2}
   blueMaterial: {fileID: 2100000, guid: a6203e6f096e11a46a2834c2ace2090b, type: 2}
   yellowMaterial: {fileID: 2100000, guid: f7244f5fc9bfd374dbe23b77d47eec21, type: 2}
+  untethered: {fileID: 0}
 --- !u!1 &1504714951826900149
 GameObject:
   m_ObjectHideFlags: 0

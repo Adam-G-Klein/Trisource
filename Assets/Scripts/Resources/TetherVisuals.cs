@@ -7,6 +7,7 @@ public class TetherVisuals : MonoBehaviour
     public Gradient blueGradient;
     public Gradient redGradient;
     public Gradient yellowGradient;
+    public Gradient checkpointGradient;
 
     private LineRenderer _tetherLine;
     private Vector3 _toPoint;
@@ -63,6 +64,17 @@ public class TetherVisuals : MonoBehaviour
         _tetherLine.SetPosition(1, _toPoint);
     }
 
+    public void checkpointTether(Vector3 toPoint)
+    {
+        _toPoint = toPoint;
+        _drawingAnimation = true;
+        _tetherDistance = 0f;
+        _tetherLine.positionCount = 2;
+        _tetherLine.SetPosition(0, _toPoint);
+        _tetherLine.SetPosition(1, _toPoint);
+        StartCoroutine(checkpointTetherDone());
+    }
+
     public void untether()
     {
         _tetherLine.positionCount = 1;
@@ -82,5 +94,19 @@ public class TetherVisuals : MonoBehaviour
     public void setRed()
     {
         _tetherLine.colorGradient = redGradient;
+    }
+
+    public void setCheckpoint()
+    {
+        _tetherLine.colorGradient = checkpointGradient;
+    }
+
+    private IEnumerator checkpointTetherDone()
+    {
+        while (_drawingAnimation)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+        untether();
     }
 }

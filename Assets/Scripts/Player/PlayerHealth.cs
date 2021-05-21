@@ -44,12 +44,19 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void resetHealth()
+    {
+        _health = _entityConst.maxHealth;
+        StopCoroutine("regenTimer");
+        StopCoroutine("regenerateHealth");
+    }
+
     IEnumerator regenTimer()
     {
         yield return new WaitForSeconds(regenWaitTime);
         Debug.Log("Enabling Regeneration");
         _canRegenHealth = true;
-        StartCoroutine(regenerateHealth());
+        StartCoroutine("regenerateHealth");
     }
     IEnumerator regenerateHealth()
     {
