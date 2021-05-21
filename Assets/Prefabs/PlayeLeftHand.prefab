@@ -99,10 +99,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8352047305878640470}
-  - component: {fileID: 1154434494763721601}
-  - component: {fileID: 8542155235220388017}
   m_Layer: 0
-  m_Name: PlayerHand 1
+  m_Name: PlayeLeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,39 +122,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 84.042, z: 0}
---- !u!114 &1154434494763721601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8352047305878640465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c524f9f63a7f4a4892aa8c46a978636, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arcSet: 0
---- !u!114 &8542155235220388017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8352047305878640465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f12e0ad4d7246cc499e155c2f968a5ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poleRatios: {x: 0, y: 0, z: 0}
-  targRatios: {x: 0, y: 0, z: 0}
-  testArcSet: 0
-  targetNames:
-  - pointer
-  - middle
-  - ring
-  - pinky
 --- !u!1 &8352047306219575428
 GameObject:
   m_ObjectHideFlags: 0
