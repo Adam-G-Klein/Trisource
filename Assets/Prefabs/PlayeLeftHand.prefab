@@ -261,7 +261,7 @@ PrefabInstance:
       objectReference: {fileID: 8352047306219575429}
     - target: {fileID: 1998045969128777622, guid: 8fb4aed7651692347aa47b04b420b9d5, type: 3}
       propertyPath: m_Name
-      value: handGraphic 1
+      value: leftHandGraphic
       objectReference: {fileID: 0}
     - target: {fileID: 3992252069762340379, guid: 8fb4aed7651692347aa47b04b420b9d5, type: 3}
       propertyPath: Target
@@ -281,7 +281,7 @@ PrefabInstance:
       objectReference: {fileID: 7114169452315542126}
     - target: {fileID: 8895133056293294764, guid: 8fb4aed7651692347aa47b04b420b9d5, type: 3}
       propertyPath: m_Name
-      value: handGraphicAndCenter
+      value: leftHandGraphicAndCenter
       objectReference: {fileID: 0}
     - target: {fileID: 8895133056293294765, guid: 8fb4aed7651692347aa47b04b420b9d5, type: 3}
       propertyPath: m_RootOrder
