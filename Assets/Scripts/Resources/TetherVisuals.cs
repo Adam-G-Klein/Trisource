@@ -11,17 +11,17 @@ public class TetherVisuals : MonoBehaviour
 
     private LineRenderer _tetherLine;
     private Vector3 _toPoint;
-    private GameObject _leftHand;
+    private Transform _leftHand;
     private bool _drawingTether = false;
     private bool _drawingAnimation = false;
     private float _tetherSpeed = 25f;
     private float _tetherDistance = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
         _tetherLine = GetComponent<LineRenderer>();
-        _leftHand = GameObject.FindGameObjectWithTag("Player");
-        _leftHand = _leftHand.transform.Find("Graphics/Hands/Left Hand").gameObject;
+        _leftHand = GameObject.FindGameObjectWithTag("Player").transform.Find("Graphics/Hands/TetherPoint");
         _tetherLine.positionCount = 1;
         return;
     }
@@ -35,7 +35,7 @@ public class TetherVisuals : MonoBehaviour
         if (_drawingAnimation)
         {
             _tetherDistance = _tetherDistance + (_tetherSpeed * Time.deltaTime);
-            totalDistance = (_toPoint - _leftHand.transform.position).magnitude;
+            totalDistance = (_toPoint - _leftHand.position).magnitude;
             if (_tetherDistance >= totalDistance)
             {
                 _drawingAnimation = false;
@@ -43,13 +43,13 @@ public class TetherVisuals : MonoBehaviour
             }
             else
             {
-                pointAlongLine = _tetherDistance * Vector3.Normalize(_leftHand.transform.position - _toPoint) + _toPoint;
+                pointAlongLine = _tetherDistance * Vector3.Normalize(_leftHand.position - _toPoint) + _toPoint;
                 _tetherLine.SetPosition(1, pointAlongLine);
             }
         }
         else if (_drawingTether)
         {
-            _tetherLine.SetPosition(1, _leftHand.transform.position);
+            _tetherLine.SetPosition(1, _leftHand.position);
         }
         return;
     }

@@ -14,20 +14,23 @@ public class ForcePush : MonoBehaviour
     private bool _active = false;
     private float _pushWaitTime = 3f;
 
-    private Renderer rightHandRenderer;
-    private Renderer leftHandRenderer;
+    private SkinnedMeshRenderer rightHandRenderer;
+    private SkinnedMeshRenderer leftHandRenderer;
 
     private GameObject hands;
 
     private AudioManager _audioManager;
 
+    private HandInterface _handInterface;
+
     // Start is called before the first frame update
     void Start()
     {
         hands = transform.Find("Graphics/Hands").gameObject;
-        rightHandRenderer = transform.Find("Graphics/Hands/Right Hand").gameObject.GetComponent<Renderer>();
-        leftHandRenderer = transform.Find("Graphics/Hands/Left Hand").gameObject.GetComponent<Renderer>();
+        rightHandRenderer = transform.Find("Graphics/Hands/PlayerRightHand").gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+        leftHandRenderer = transform.Find("Graphics/Hands/PlayerLeftHand").gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
         _audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+        _handInterface = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<HandInterface>();
         return;
     }
 
@@ -50,6 +53,7 @@ public class ForcePush : MonoBehaviour
             newPushController = newPush.GetComponent<PushController>();
             newPushController.initPush(_speed, _pushForce);
             _audioManager.playForcePush();
+            _handInterface.uncurlAndCurlRightHand(0.006f);
             startCooldown();
         }
     }
@@ -70,8 +74,12 @@ public class ForcePush : MonoBehaviour
 
     void setHands(Material material)
     {
-        rightHandRenderer.material = material;
-        leftHandRenderer.material = material;
+        Material[] mats = rightHandRenderer.materials;
+        mats[0] = material;
+        rightHandRenderer.materials = mats;
+        mats = leftHandRenderer.materials;
+        mats[0] = material;
+        leftHandRenderer.materials = mats;
     }
 
     public void activate()
