@@ -19,8 +19,8 @@ public class ActivateResource : MonoBehaviour
     private PlayerCameraController cameraController;
     private ShootProjectile shootProjectile;
     private ForcePush forcePush;
-    private Renderer rightHand;
-    private Renderer leftHand;
+    private SkinnedMeshRenderer rightHand;
+    private SkinnedMeshRenderer leftHand;
     private GroundMovement movement;
     private PlayerMovement playerMovement;
     private AudioManager _audioManager;
@@ -30,14 +30,16 @@ public class ActivateResource : MonoBehaviour
 
     private PlayerInterface _playerInterface;
 
+    private HandInterface _handInterface;
+
     // Start is called before the first frame update
     void Start()
     {
         cameraController = GetComponent<PlayerCameraController>();
         shootProjectile = GetComponent<ShootProjectile>();
         forcePush = GetComponent<ForcePush>();
-        rightHand = transform.Find("Graphics/Hands/Right Hand").gameObject.GetComponent<Renderer>();
-        leftHand = transform.Find("Graphics/Hands/Left Hand").gameObject.GetComponent<Renderer>();
+        rightHand = transform.Find("Graphics/Hands/PlayerRightHand").gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+        leftHand = transform.Find("Graphics/Hands/PlayerLeftHand").gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
         tetherVisuals = GameObject.FindGameObjectWithTag("VisualManager").GetComponentInChildren<TetherVisuals>();
         movement = GetComponent<GroundMovement>();
         _baseMoveSpeed = GetComponent<EntityConst>().speed;
@@ -45,6 +47,7 @@ public class ActivateResource : MonoBehaviour
         _baseJumpHeight = playerMovement.jumpHeight;
         _audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         _playerInterface = GetComponent<PlayerInterface>();
+        _handInterface = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<HandInterface>();
         return;
     }
 
@@ -73,23 +76,38 @@ public class ActivateResource : MonoBehaviour
             {
                 case "Red Resource":
                     resourceConst = hit.collider.gameObject.GetComponent<ResourceConst>();
+                    if (_blueActive == false && _yellowActive == false)
+                        _handInterface.curlLeftHand();
+                    else
+                        _handInterface.uncurlAndCurlLeftHand();
                     activateRed(resourceConst.projectileSpeed, resourceConst.projectileDamage);
                     tetherPoint = getResourceTetherPoint(hit);
                     tetherVisuals.tether(tetherPoint);
+                    //_handInterface.curlRightHand();
                     break;
 
                 case "Blue Resource":
                     resourceConst = hit.collider.gameObject.GetComponent<ResourceConst>();
+                    if (_redActive == false && _yellowActive == false)
+                        _handInterface.curlLeftHand();
+                    else
+                        _handInterface.uncurlAndCurlLeftHand();
                     activateBlue(resourceConst.pushSpeed, resourceConst.pushForce);
                     tetherPoint = getResourceTetherPoint(hit);
                     tetherVisuals.tether(tetherPoint);
+                    //_handInterface.curlRightHand();
                     break;
 
                 case "Yellow Resource":
                     resourceConst = hit.collider.gameObject.GetComponent<ResourceConst>();
+                    if (_blueActive == false && _redActive == false)
+                        _handInterface.curlLeftHand();
+                    else
+                        _handInterface.uncurlAndCurlLeftHand();
                     activateYellow(resourceConst.zoomIncrease, resourceConst.jumpIncrease);
                     tetherPoint = getResourceTetherPoint(hit);
                     tetherVisuals.tether(tetherPoint);
+                    //_handInterface.curlRightHand();
                     break;
 
                 case "Checkpoint":
@@ -97,6 +115,7 @@ public class ActivateResource : MonoBehaviour
                     tetherVisuals.checkpointTether(tetherPoint);
                     tetherVisuals.setCheckpoint();
                     _playerInterface.checkpoint(hit.collider.gameObject.transform.Find("Respawn Point").transform.position);
+                    _handInterface.curlAndUncurlLeftHand();
                     break;
             }
         }
@@ -212,11 +231,16 @@ public class ActivateResource : MonoBehaviour
         deactivateYellow();
         setHands(untethered);
         tetherVisuals.untether();
+        _handInterface.uncurlLeftHand();
     }
 
     void setHands(Material material)
     {
-        rightHand.material = material;
-        leftHand.material = material;
+        Material[] mats = rightHand.materials;
+        mats[0] = material;
+        rightHand.materials = mats;
+        mats = leftHand.materials;
+        mats[0] = material;
+        leftHand.materials = mats;
     }
 }

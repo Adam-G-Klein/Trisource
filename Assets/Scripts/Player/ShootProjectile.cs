@@ -8,7 +8,7 @@ public class ShootProjectile : MonoBehaviour
 
     private bool _active = false;
     private bool _canShoot = true;
-    private float _shootWaitTime = 0.25f;
+    private float _shootWaitTime = 0.4f;
     private float _speed = 30f;
     private float _damage = 25f;
 
@@ -16,12 +16,16 @@ public class ShootProjectile : MonoBehaviour
     private Transform hand;
 
     private AudioManager audioManager;
+
+    private HandInterface _handInterface;
+
     // Start is called before the first frame update
     void Start()
     {
         hands = transform.Find("Graphics/Hands");
-        hand = transform.Find("Graphics/Hands/Right Hand");
+        hand = transform.Find("Graphics/Hands/RightHandPoint");
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+        _handInterface = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<HandInterface>();
         return;
     }
 
@@ -45,6 +49,7 @@ public class ShootProjectile : MonoBehaviour
             newProjectileController.initProjectile(_speed, _damage);
             _canShoot = false;
             audioManager.playFireProjectile();
+            _handInterface.uncurlAndCurlRightHand(0.0004f);
             StartCoroutine(shootTimer());
         }
     }
