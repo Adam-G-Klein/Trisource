@@ -49,7 +49,7 @@ public class ShootProjectile : MonoBehaviour
             newProjectileController.initProjectile(_speed, _damage);
             _canShoot = false;
             audioManager.playFireProjectile();
-            _handInterface.uncurlAndCurlRightHand(0.0004f);
+            _handInterface.uncurlAndCurlRightHandRed();
             StartCoroutine(shootTimer());
         }
     }

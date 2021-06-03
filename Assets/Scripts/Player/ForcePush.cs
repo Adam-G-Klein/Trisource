@@ -53,7 +53,7 @@ public class ForcePush : MonoBehaviour
             newPushController = newPush.GetComponent<PushController>();
             newPushController.initPush(_speed, _pushForce);
             _audioManager.playForcePush();
-            _handInterface.uncurlAndCurlRightHand(0.006f);
+            _handInterface.uncurlAndCurlRightHandBlue();
             startCooldown();
         }
     }
