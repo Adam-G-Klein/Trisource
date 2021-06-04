@@ -12,27 +12,38 @@ public class CrawlerLegAnimation : MonoBehaviour
     // register hits on everything but the crawler layer
     private int layerMask;
     public float maxRaycastDistance = 3f;
+    private Vector3 defaultLegPos;
+    private bool didhit;
     void Start()
     {
         layerMask = ~(1 << LayerMask.NameToLayer("Crawlers"));
+
+        defaultLegPos = (raycastTarget.position - raycastOrigin.position) * 3;
     }
 
     // Update is called once per frame
     void Update()
     {
         Vector3 raycastHit = getRaycastHit();
-        if(Vector3.Magnitude(ikTarget.position - raycastHit) > allowableDistance)
-            ikTarget.position = raycastHit;
+        if(Vector3.Magnitude(ikTarget.position - raycastHit) > allowableDistance){
+            if(didhit){
+                ikTarget.position = raycastHit;
+            } else {
+                ikTarget.position = defaultLegPos;
+            }
+        }
+
     }
 
     private Vector3 getRaycastHit(){
         RaycastHit hit;
         Vector3 raycastDir = raycastTarget.position - raycastOrigin.position;
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(raycastOrigin.position, 
+        didhit = Physics.Raycast(raycastOrigin.position, 
                 raycastDir, 
                 out hit, 
-                maxRaycastDistance, layerMask))
+                maxRaycastDistance, layerMask);
+        if (didhit)
         {
             Debug.DrawRay(raycastOrigin.position, raycastDir * hit.distance, Color.yellow);
             //Debug.Log("Did Hit");

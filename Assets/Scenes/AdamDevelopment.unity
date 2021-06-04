@@ -1322,30 +1322,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 684782780660132992, guid: f3df49daccb834349bed8c9adcdc1368, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 758755198672459366, guid: f3df49daccb834349bed8c9adcdc1368, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2250205122434676786, guid: f3df49daccb834349bed8c9adcdc1368, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3249879697596879954, guid: f3df49daccb834349bed8c9adcdc1368, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.64
-      objectReference: {fileID: 0}
-    - target: {fileID: 3249879697596879954, guid: f3df49daccb834349bed8c9adcdc1368, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.09
-      objectReference: {fileID: 0}
-    - target: {fileID: 3521248438717424603, guid: f3df49daccb834349bed8c9adcdc1368, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3923837224423267790, guid: f3df49daccb834349bed8c9adcdc1368, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -1390,29 +1366,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4586837006246416388, guid: f3df49daccb834349bed8c9adcdc1368, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4827980839401852679, guid: f3df49daccb834349bed8c9adcdc1368, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4920156116933850611, guid: f3df49daccb834349bed8c9adcdc1368, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 6549490748217593280, guid: f3df49daccb834349bed8c9adcdc1368, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7019638630214543541, guid: f3df49daccb834349bed8c9adcdc1368, type: 3}
       propertyPath: m_Name
       value: CrawlerEnemyWithIKTargets
-      objectReference: {fileID: 0}
-    - target: {fileID: 7496414051779772381, guid: f3df49daccb834349bed8c9adcdc1368, type: 3}
-      propertyPath: stayStill
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f3df49daccb834349bed8c9adcdc1368, type: 3}

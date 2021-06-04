@@ -23,6 +23,7 @@ public class SceneChangeButton : MonoBehaviour
     // Update is called once per frame
     public void clicked()
     {
+        print("sceneChange clicked");
         print("changed to scene " + sceneToChangeTo.ToString());
         if (clickable.clickable)
         {
