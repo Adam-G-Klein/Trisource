@@ -13,11 +13,14 @@ public class AudioManager : MonoBehaviour
     public AudioClip yellowOutroClip;
     public AudioClip jumpTakeoffClip;
     public AudioClip jumpLandingClip;
+    public AudioClip idleClip;
     public List<AudioClip> playerStepClips;
     public List<AudioClip> crawlerStepClips;
+    public List<AudioClip> introCinematicClips;
 
     private AudioSource _audioSource;
     private AudioSource _oneShotAudioSource;
+    private AudioSource _idleSource;
     private bool _playSteps = false;
     private float sfxVolume = 0.1f;
 
@@ -26,6 +29,7 @@ public class AudioManager : MonoBehaviour
     {
         _audioSource = GetComponent<AudioSource>();
         _oneShotAudioSource = transform.Find("OneShot").GetComponent<AudioSource>();
+        _idleSource = transform.Find("AmbientLoop").GetComponent<AudioSource>();
         return;
     }
 
@@ -58,6 +62,19 @@ public class AudioManager : MonoBehaviour
     public void playForcePushHit()
     {
         _oneShotAudioSource.PlayOneShot(forcePushHitClip, sfxVolume);
+    }
+
+    public void playIntro(int i)
+    {
+        _oneShotAudioSource.PlayOneShot(introCinematicClips[i], sfxVolume);
+    }
+
+    public void playIdle()
+    {
+        _idleSource.clip = idleClip;
+        _idleSource.volume = 0.03f;
+        _idleSource.loop = true;
+        _idleSource.Play();
     }
 
     public void playYellow()

@@ -2837,6 +2837,10 @@ MonoBehaviour:
     m_Signals:
     - {fileID: 11400000, guid: c74405650e66fe34e811b7088cadece9, type: 2}
     - {fileID: 11400000, guid: 0436fa5ff94b64348b57eb5b9fc1d5b7, type: 2}
+    - {fileID: 11400000, guid: 7f6831929e45acc4ca5ef9c4627dba0e, type: 2}
+    - {fileID: 0}
+    - {fileID: 11400000, guid: 9864c901607c3014da45a2a0bc7fb6b3, type: 2}
+    - {fileID: 11400000, guid: a9dacdba5ec86a44d819238ed4e51b7c, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -2889,6 +2893,74 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 987723335}
+          m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+          m_MethodName: playIdle
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 987723335}
+          m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+          m_MethodName: playIntro
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 997643984}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 987723335}
+          m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+          m_MethodName: playIntro
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 987723335}
+          m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+          m_MethodName: playIntro
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
           m_CallState: 2
 --- !u!320 &997643986
 PlayableDirector:
@@ -3969,6 +4041,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3960768474346588267, guid: d078316a1f545214db14ae3ceafdde53, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -7813697745048194698, guid: b56de2376bad17642b407d258886a2a6, type: 2}
     - target: {fileID: 7186018501834422372, guid: d078316a1f545214db14ae3ceafdde53, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -4017,6 +4093,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7268998743434801329, guid: d078316a1f545214db14ae3ceafdde53, type: 3}
+      propertyPath: idleClip
+      value: 
+      objectReference: {fileID: 8300000, guid: dbffe301bfd677247ad9b8381b392249, type: 3}
+    - target: {fileID: 7268998743434801329, guid: d078316a1f545214db14ae3ceafdde53, type: 3}
+      propertyPath: introCinematicClips.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7268998743434801329, guid: d078316a1f545214db14ae3ceafdde53, type: 3}
+      propertyPath: introCinematicClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: c929ef32cd74f774a9f33e65b3b7aee9, type: 3}
+    - target: {fileID: 7268998743434801329, guid: d078316a1f545214db14ae3ceafdde53, type: 3}
+      propertyPath: introCinematicClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 97d7450fa4b3a7c449262ab8047b21e4, type: 3}
+    - target: {fileID: 7268998743434801329, guid: d078316a1f545214db14ae3ceafdde53, type: 3}
+      propertyPath: introCinematicClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: c842ab085fce04548a4170b23cfe78ca, type: 3}
     - target: {fileID: 8553861184032334038, guid: d078316a1f545214db14ae3ceafdde53, type: 3}
       propertyPath: OutputAudioMixerGroup
       value: 
