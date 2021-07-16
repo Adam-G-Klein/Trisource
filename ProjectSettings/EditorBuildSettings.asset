@@ -6,33 +6,33 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/LukeDevelopment.unity
+    path: Assets/Scenes/SpringDemo/LukeDevelopment.unity
     guid: 2dce5061af80e7948848b6e4925e38d3
   - enabled: 0
-    path: Assets/Scenes/TutorialScene.unity
+    path: Assets/Scenes/SpringDemo/TutorialScene.unity
     guid: 0dcc39f8f37c1604bb0824461c9ade62
   - enabled: 1
-    path: Assets/Scenes/MenuScene.unity
+    path: Assets/Scenes/SpringDemo/MenuScene.unity
     guid: 1ca5a3f121c2e2f43929e0715114d564
   - enabled: 0
-    path: Assets/Scenes/Levels/1_red.unity
+    path: Assets/Scenes/SpringDemo/Levels/1_red.unity
     guid: 2b6ea015af609ae49a7bee743d55c103
   - enabled: 0
-    path: Assets/Scenes/Levels/1_blue.unity
+    path: Assets/Scenes/SpringDemo/Levels/1_blue.unity
     guid: 139fb1b32be011a499e3b4dee2e5594d
   - enabled: 0
-    path: Assets/Scenes/Levels/1_yell.unity
+    path: Assets/Scenes/SpringDemo/Levels/1_yell.unity
     guid: 68e1ffa2b17899246a79780994672b52
   - enabled: 0
-    path: Assets/Scenes/Levels/1_red_1_yell.unity
+    path: Assets/Scenes/SpringDemo/Levels/1_red_1_yell.unity
     guid: d67026dd511391943a823208f3aa256b
   - enabled: 0
-    path: Assets/Scenes/Levels/1_red_1_yell_1_blue.unity
+    path: Assets/Scenes/SpringDemo/Levels/1_red_1_yell_1_blue.unity
     guid: b958e536ecae22449ae2e90963940c62
   - enabled: 0
-    path: Assets/Scenes/Levels/whiplash.unity
+    path: Assets/Scenes/SpringDemo/Levels/whiplash.unity
     guid: edcf38083e4a3cc43aca11dcd15172e2
   - enabled: 1
-    path: Assets/Scenes/CityCombination.unity
+    path: Assets/Scenes/SpringDemo/CityCombination.unity
     guid: ab776d6c86deb474f9d4da2ebdc07d0a
   m_configObjects: {}
