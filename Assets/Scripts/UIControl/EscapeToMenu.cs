@@ -6,7 +6,7 @@ public class EscapeToMenu : MonoBehaviour
 {
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Delete) || Input.GetKeyDown(KeyCode.Backspace))
             UnityEngine.SceneManagement.SceneManager.LoadScene("MenuScene");
 
         

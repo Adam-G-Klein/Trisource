@@ -63,7 +63,6 @@ public class ChainArcControls : MonoBehaviour
             targs.Add(child.name, child);
             fingerTargInitPos.Add(child.name, child.localPosition);
             i++;
-            print("found target: " + child.name);
         }
     }
 
@@ -78,7 +77,6 @@ public class ChainArcControls : MonoBehaviour
             poles.Add(child.name, child);
             fingerPoleInitPos.Add(child.name, child.localPosition);
             i++;
-            print("found pole: " + child.name);
         }
 
     }

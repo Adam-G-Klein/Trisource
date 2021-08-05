@@ -14,6 +14,7 @@ TagManager:
   - LevelManager
   - AudioManager
   - Checkpoint
+  - CinematicManager
   layers:
   - Default
   - TransparentFX

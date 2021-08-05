@@ -140,7 +140,6 @@ public class AudioManager : MonoBehaviour
 
     private IEnumerator steps(float stepTimeInterval)
     {
-        Debug.Log("play step");
         yield return new WaitForSeconds(stepTimeInterval/3);
         while (_playSteps)
         {
