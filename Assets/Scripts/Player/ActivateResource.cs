@@ -55,20 +55,16 @@ public class ActivateResource : MonoBehaviour
     void Update()
     {
         _hover = true;
-        bool hitSomething = false;
         RaycastHit hit = new RaycastHit();
+        bool hitSomething = Physics.Raycast(cameraController.cam.transform.position, cameraController.cam.transform.forward, out hit, _resourceDistance);
         Vector3 tetherPoint;
         ResourceConst resourceConst;
 
         if (Input.GetMouseButtonDown(1) && _canTether)
         {
-            hitSomething = Physics.Raycast(cameraController.cam.transform.position, cameraController.cam.transform.forward, out hit, _resourceDistance);
             _hover = false;
         }
-        else
-        {
-            hitSomething = Physics.Raycast(cameraController.cam.transform.position, cameraController.cam.transform.forward, out hit, _resourceDistance);
-        }
+
         if (hitSomething && !_hover)
         {
             hitSomething = false;

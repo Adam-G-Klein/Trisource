@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public PlayerCameraController cameraController;
     public float jumpHeight = 3f;
+    public float survivableFallHeight = 20f;
     public KeyCode cameraToggleKey = KeyCode.R;
 
     private GroundMovement _moveController;
@@ -18,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInterface _interface;
     private AudioManager _audioManager;
 
+    private Vector3 currMoveDir;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,23 +33,12 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 moveDir;
-        float moveAngle = 0f;
-        bool firstPerson = cameraController.firstPerson;
-        if (!firstPerson)
-        {
-            moveAngle = cameraController.cam.transform.eulerAngles.y;
-            moveDir = Quaternion.Euler(0f, moveAngle, 0f) * _inputs;
-        }
-        else
-        {
-            moveDir = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f) * _inputs;
-        }
+        currMoveDir = getMoveDir();
+        currMoveDir = currMoveDir.normalized;
         checkFallDamage();
-        moveDir = moveDir.normalized;
         if (activeResource.getActive() == 1)
-            moveDir = detector.detectCollision(moveDir);
-        if (moveDir.magnitude > 0 && _moveController.checkApproximatelyGrounded())
+            currMoveDir = detector.detectCollision(currMoveDir);
+        if (currMoveDir.magnitude > 0 && _moveController.checkApproximatelyGrounded())
         {
             _audioManager.playSteps(_moveController.getSpeed());
         }
@@ -55,14 +46,26 @@ public class PlayerMovement : MonoBehaviour
         {
             _audioManager.stopSteps();
         }
-        _moveController.moveHorizontal(moveDir);
+        _moveController.moveHorizontal(currMoveDir);
+    }
+
+    
+    Vector3 getMoveDir()
+    {
+        bool firstPerson = cameraController.firstPerson;
+        float moveAngle = cameraController.cam.transform.eulerAngles.y;
+        if (!firstPerson)
+        {
+            return Quaternion.Euler(0f, moveAngle, 0f) * _inputs;
+        }
+        return Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f) * _inputs;
     }
 
     void checkFallDamage()
     {
         if(_prevGrounded == false && _moveController.isGrounded())
         {
-            if (_lastHeight.y - transform.position.y > 20f)
+            if (_lastHeight.y - transform.position.y > survivableFallHeight)
             {
                 Debug.Log("player being killed");
                 _interface.killPlayer();

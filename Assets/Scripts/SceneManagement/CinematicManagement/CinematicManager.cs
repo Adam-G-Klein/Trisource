@@ -15,7 +15,10 @@ public class CinematicManager : MonoBehaviour
     {
 
         //do everything else before the line below:
-        playOnAwakeCinematic.gameObject.SetActive(true);
+
+        if(!cutscenesDisabled 
+            && !disabledCinematics.Contains(playOnAwakeCinematic.name))
+            playOnAwakeCinematic.gameObject.SetActive(true);
         
     }
 
